@@ -5,6 +5,9 @@
       location = "group:/Users/Cihat/Code/Apple/AnyMenu/AnyMenu.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:Demo/Demo.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:UsageExamples.playground">
    </FileRef>
 </Workspace>
