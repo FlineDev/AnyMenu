@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E97FE651F5F0DB4006605C5 /* AnyMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E97FE641F5F0DB4006605C5 /* AnyMenuViewController.swift */; };
+		2E97FE661F5F0DB4006605C5 /* AnyMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E97FE641F5F0DB4006605C5 /* AnyMenuViewController.swift */; };
+		2E97FE671F5F0DB4006605C5 /* AnyMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E97FE641F5F0DB4006605C5 /* AnyMenuViewController.swift */; };
+		2E97FE681F5F0DB4006605C5 /* AnyMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E97FE641F5F0DB4006605C5 /* AnyMenuViewController.swift */; };
 		A102BD481F02355A000C6B38 /* AnyMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A102BD3E1F02355A000C6B38 /* AnyMenu.framework */; };
 		A102BD661F023573000C6B38 /* AnyMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A102BD5D1F023573000C6B38 /* AnyMenu.framework */; };
 		A102BD821F023582000C6B38 /* AnyMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A102BD791F023582000C6B38 /* AnyMenu.framework */; };
@@ -89,6 +93,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2E97FE641F5F0DB4006605C5 /* AnyMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyMenuViewController.swift; sourceTree = "<group>"; };
 		A102BD3E1F02355A000C6B38 /* AnyMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AnyMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A102BD471F02355A000C6B38 /* AnyMenu-iOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AnyMenu-iOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A102BD5D1F023573000C6B38 /* AnyMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AnyMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -219,6 +224,7 @@
 		A102BDA01F02387A000C6B38 /* Code */ = {
 			isa = PBXGroup;
 			children = (
+				2E97FE641F5F0DB4006605C5 /* AnyMenuViewController.swift */,
 			);
 			path = Code;
 			sourceTree = "<group>";
@@ -548,24 +554,28 @@
 				TargetAttributes = {
 					A102BD3D1F02355A000C6B38 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 					};
 					A102BD461F02355A000C6B38 = {
 						CreatedOnToolsVersion = 9.0;
 					};
 					A102BD5C1F023573000C6B38 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 					};
 					A102BD641F023573000C6B38 = {
 						CreatedOnToolsVersion = 9.0;
 					};
 					A102BD781F023582000C6B38 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 					};
 					A102BD801F023582000C6B38 = {
 						CreatedOnToolsVersion = 9.0;
 					};
 					A102BD941F02358E000C6B38 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 					};
 				};
 			};
@@ -708,6 +718,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E97FE651F5F0DB4006605C5 /* AnyMenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -723,6 +734,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E97FE661F5F0DB4006605C5 /* AnyMenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -738,6 +750,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E97FE671F5F0DB4006605C5 /* AnyMenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -753,6 +766,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E97FE681F5F0DB4006605C5 /* AnyMenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -899,7 +913,9 @@
 		A102BD531F02355A000C6B38 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 767S6EFMJ8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -908,6 +924,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = AnyMenu;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -916,7 +933,9 @@
 		A102BD541F02355A000C6B38 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 767S6EFMJ8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -933,6 +952,7 @@
 		A102BD561F02355A000C6B38 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 767S6EFMJ8;
 				INFOPLIST_FILE = "Tests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -946,6 +966,7 @@
 		A102BD571F02355A000C6B38 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 767S6EFMJ8;
 				INFOPLIST_FILE = "Tests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -959,8 +980,10 @@
 		A102BD6F1F023573000C6B38 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 767S6EFMJ8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -971,6 +994,7 @@
 				PRODUCT_NAME = AnyMenu;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -978,8 +1002,10 @@
 		A102BD701F023573000C6B38 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 767S6EFMJ8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -997,6 +1023,7 @@
 		A102BD721F023573000C6B38 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 767S6EFMJ8;
@@ -1013,6 +1040,7 @@
 		A102BD731F023573000C6B38 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 767S6EFMJ8;
@@ -1029,7 +1057,9 @@
 		A102BD8B1F023582000C6B38 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 767S6EFMJ8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1039,6 +1069,7 @@
 				PRODUCT_NAME = AnyMenu;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 11.0;
@@ -1048,7 +1079,9 @@
 		A102BD8C1F023582000C6B38 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 767S6EFMJ8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1067,6 +1100,7 @@
 		A102BD8E1F023582000C6B38 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 767S6EFMJ8;
 				INFOPLIST_FILE = "Tests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1082,6 +1116,7 @@
 		A102BD8F1F023582000C6B38 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 767S6EFMJ8;
 				INFOPLIST_FILE = "Tests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1098,7 +1133,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 767S6EFMJ8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1108,6 +1145,7 @@
 				PRODUCT_NAME = AnyMenu;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 4.0;
@@ -1118,7 +1156,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 767S6EFMJ8;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;

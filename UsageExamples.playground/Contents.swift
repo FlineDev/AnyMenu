@@ -1,5 +1,5 @@
 // swiftlint:disable file_header
-import Foundation
 import AnyMenu
+import Foundation
 
 // Add your usage examples here.

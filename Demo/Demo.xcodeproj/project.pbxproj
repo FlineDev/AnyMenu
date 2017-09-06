@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2E97FE611F5F0929006605C5 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E97FE601F5F0929006605C5 /* MenuViewController.swift */; };
 		2E97FE631F5F095F006605C5 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E97FE621F5F095F006605C5 /* ContentViewController.swift */; };
+		2E97FE6A1F5FDE9D006605C5 /* AnyMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E97FE691F5FDE9D006605C5 /* AnyMenu.framework */; };
+		2E97FE6B1F5FDE9D006605C5 /* AnyMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2E97FE691F5FDE9D006605C5 /* AnyMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2EE2DD171F5F080B0092B777 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE2DD161F5F080B0092B777 /* AppDelegate.swift */; };
 		2EE2DD1E1F5F080B0092B777 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EE2DD1D1F5F080B0092B777 /* Assets.xcassets */; };
 		2EE2DD211F5F080B0092B777 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EE2DD1F1F5F080B0092B777 /* LaunchScreen.storyboard */; };
@@ -33,9 +35,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		2E97FE6C1F5FDE9D006605C5 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2E97FE6B1F5FDE9D006605C5 /* AnyMenu.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		2E97FE601F5F0929006605C5 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		2E97FE621F5F095F006605C5 /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+		2E97FE691F5FDE9D006605C5 /* AnyMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AnyMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EE2DD131F5F080A0092B777 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EE2DD161F5F080B0092B777 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EE2DD1D1F5F080B0092B777 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -54,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E97FE6A1F5FDE9D006605C5 /* AnyMenu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +115,7 @@
 		2EE2DD0A1F5F080A0092B777 = {
 			isa = PBXGroup;
 			children = (
+				2E97FE691F5FDE9D006605C5 /* AnyMenu.framework */,
 				2EE2DD151F5F080B0092B777 /* Demo */,
 				2EE2DD2A1F5F080B0092B777 /* DemoTests */,
 				2EE2DD351F5F080B0092B777 /* DemoUITests */,
@@ -151,6 +170,7 @@
 				2EE2DD0F1F5F080A0092B777 /* Sources */,
 				2EE2DD101F5F080A0092B777 /* Frameworks */,
 				2EE2DD111F5F080A0092B777 /* Resources */,
+				2E97FE6C1F5FDE9D006605C5 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

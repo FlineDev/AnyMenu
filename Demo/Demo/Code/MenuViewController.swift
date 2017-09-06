@@ -9,5 +9,10 @@
 import UIKit
 
 class MenuViewController: UIViewController {
-    // TODO: not yet implemented
+    // MARK: - View Lifecycle Methods
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        view.backgroundColor = .blue
+    }
 }

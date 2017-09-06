@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AnyMenu
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - App Lifecycle Methods
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // TODO: not yet implemented
+        let menuViewController = MenuViewController()
+        let initialContentViewController = ContentViewController(backgroundColor: .lightGray)
+
+        let anyMenuViewController = AnyMenuViewController(
+            menuViewController: menuViewController,
+            contentViewController: initialContentViewController,
+            menuOverlaysContent: false
+        )
+        anyMenuViewController.present(in: &window)
 
         return true
     }
