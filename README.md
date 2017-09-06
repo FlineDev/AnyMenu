@@ -5,13 +5,12 @@
 </p>
 
 <p align="center">
-    <a href="https://www.bitrise.io/app/<#???#>">
-        <img src="https://www.bitrise.io/app/<#???#>/status.svg?token=<#???#>&branch=stable"
+    <a href="https://www.bitrise.io/app/5c5c85144ac220cf">
+        <img src="https://www.bitrise.io/app/5c5c85144ac220cf/status.svg?token=Z7zf4Dka_bWVtxCAd6jAmA&branch=stable"
              alt="Build Status">
     </a>
-    <a href="https://codebeat.co/projects/github-com-flinesoft-AnyMenu-stable">
-        <img src="https://codebeat.co/badges/<#???#>"
-             alt="codebeat badge">
+    <a href="https://codebeat.co/projects/github-com-flinesoft-anymenu-stable">
+        <img alt="codebeat badge" src="https://codebeat.co/badges/024e96f9-2293-407b-8f6c-52b494a26336" />
     </a>
     <a href="https://github.com/Flinesoft/AnyMenu/releases">
         <img src="https://img.shields.io/badge/Version-1.0.0-blue.svg"
