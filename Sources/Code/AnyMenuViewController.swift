@@ -17,6 +17,9 @@ public class AnyMenuViewController: UIViewController {
         case closed
     }
 
+    // MARK: - Stored Type Properties
+    static weak var lastInstance: AnyMenuViewController?
+
     // MARK: - Stored Instance Properties
     /// The menu view controller which contains the menu.
     public var menuViewController: UIViewController {
@@ -58,6 +61,7 @@ public class AnyMenuViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
 
+        AnyMenuViewController.lastInstance = self
         configureMenuViewController()
         configureContentViewController()
         configureMenuOverlaysContent()

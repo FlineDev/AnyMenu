@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E1934541F6039AF00C8DC5A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1934531F6039AF00C8DC5A /* UIViewControllerExtension.swift */; };
+		2E1934551F6039AF00C8DC5A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1934531F6039AF00C8DC5A /* UIViewControllerExtension.swift */; };
+		2E1934561F6039AF00C8DC5A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1934531F6039AF00C8DC5A /* UIViewControllerExtension.swift */; };
+		2E1934571F6039AF00C8DC5A /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1934531F6039AF00C8DC5A /* UIViewControllerExtension.swift */; };
+		2E1934591F603C3400C8DC5A /* MenuIconGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1934581F603C3400C8DC5A /* MenuIconGenerator.swift */; };
+		2E19345A1F603C3400C8DC5A /* MenuIconGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1934581F603C3400C8DC5A /* MenuIconGenerator.swift */; };
+		2E19345B1F603C3400C8DC5A /* MenuIconGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1934581F603C3400C8DC5A /* MenuIconGenerator.swift */; };
+		2E19345C1F603C3400C8DC5A /* MenuIconGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1934581F603C3400C8DC5A /* MenuIconGenerator.swift */; };
+		2E19345E1F60906300C8DC5A /* MenuIconConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E19345D1F60906300C8DC5A /* MenuIconConfig.swift */; };
+		2E19345F1F60906300C8DC5A /* MenuIconConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E19345D1F60906300C8DC5A /* MenuIconConfig.swift */; };
+		2E1934601F60906300C8DC5A /* MenuIconConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E19345D1F60906300C8DC5A /* MenuIconConfig.swift */; };
+		2E1934611F60906300C8DC5A /* MenuIconConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E19345D1F60906300C8DC5A /* MenuIconConfig.swift */; };
+		2E1934631F60944200C8DC5A /* MenuIconType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1934621F60944200C8DC5A /* MenuIconType.swift */; };
+		2E1934641F60944200C8DC5A /* MenuIconType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1934621F60944200C8DC5A /* MenuIconType.swift */; };
+		2E1934651F60944200C8DC5A /* MenuIconType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1934621F60944200C8DC5A /* MenuIconType.swift */; };
+		2E1934661F60944200C8DC5A /* MenuIconType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1934621F60944200C8DC5A /* MenuIconType.swift */; };
 		2E97FE651F5F0DB4006605C5 /* AnyMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E97FE641F5F0DB4006605C5 /* AnyMenuViewController.swift */; };
 		2E97FE661F5F0DB4006605C5 /* AnyMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E97FE641F5F0DB4006605C5 /* AnyMenuViewController.swift */; };
 		2E97FE671F5F0DB4006605C5 /* AnyMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E97FE641F5F0DB4006605C5 /* AnyMenuViewController.swift */; };
@@ -93,6 +109,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2E1934531F6039AF00C8DC5A /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		2E1934581F603C3400C8DC5A /* MenuIconGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuIconGenerator.swift; sourceTree = "<group>"; };
+		2E19345D1F60906300C8DC5A /* MenuIconConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuIconConfig.swift; sourceTree = "<group>"; };
+		2E1934621F60944200C8DC5A /* MenuIconType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuIconType.swift; sourceTree = "<group>"; };
 		2E97FE641F5F0DB4006605C5 /* AnyMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyMenuViewController.swift; sourceTree = "<group>"; };
 		A102BD3E1F02355A000C6B38 /* AnyMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AnyMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A102BD471F02355A000C6B38 /* AnyMenu-iOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AnyMenu-iOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -225,6 +245,10 @@
 			isa = PBXGroup;
 			children = (
 				2E97FE641F5F0DB4006605C5 /* AnyMenuViewController.swift */,
+				2E1934531F6039AF00C8DC5A /* UIViewControllerExtension.swift */,
+				2E1934581F603C3400C8DC5A /* MenuIconGenerator.swift */,
+				2E19345D1F60906300C8DC5A /* MenuIconConfig.swift */,
+				2E1934621F60944200C8DC5A /* MenuIconType.swift */,
 			);
 			path = Code;
 			sourceTree = "<group>";
@@ -718,6 +742,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E19345E1F60906300C8DC5A /* MenuIconConfig.swift in Sources */,
+				2E1934541F6039AF00C8DC5A /* UIViewControllerExtension.swift in Sources */,
+				2E1934591F603C3400C8DC5A /* MenuIconGenerator.swift in Sources */,
+				2E1934631F60944200C8DC5A /* MenuIconType.swift in Sources */,
 				2E97FE651F5F0DB4006605C5 /* AnyMenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -734,6 +762,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E19345F1F60906300C8DC5A /* MenuIconConfig.swift in Sources */,
+				2E1934551F6039AF00C8DC5A /* UIViewControllerExtension.swift in Sources */,
+				2E19345A1F603C3400C8DC5A /* MenuIconGenerator.swift in Sources */,
+				2E1934641F60944200C8DC5A /* MenuIconType.swift in Sources */,
 				2E97FE661F5F0DB4006605C5 /* AnyMenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -750,6 +782,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E1934601F60906300C8DC5A /* MenuIconConfig.swift in Sources */,
+				2E1934561F6039AF00C8DC5A /* UIViewControllerExtension.swift in Sources */,
+				2E19345B1F603C3400C8DC5A /* MenuIconGenerator.swift in Sources */,
+				2E1934651F60944200C8DC5A /* MenuIconType.swift in Sources */,
 				2E97FE671F5F0DB4006605C5 /* AnyMenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -766,6 +802,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E1934611F60906300C8DC5A /* MenuIconConfig.swift in Sources */,
+				2E1934571F6039AF00C8DC5A /* UIViewControllerExtension.swift in Sources */,
+				2E19345C1F603C3400C8DC5A /* MenuIconGenerator.swift in Sources */,
+				2E1934661F60944200C8DC5A /* MenuIconType.swift in Sources */,
 				2E97FE681F5F0DB4006605C5 /* AnyMenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
