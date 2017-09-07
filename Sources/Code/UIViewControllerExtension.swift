@@ -9,6 +9,13 @@
 import UIKit
 
 extension UIViewController {
+    // MARK: - Computed Instance Properties
+    /// Returns the menu container view controller if any exists.
+    public var anyMenuViewController: AnyMenuViewController? {
+        return AnyMenuViewController.shared
+    }
+
+    // MARK: - Instance Methods
     /// Creates a bar button item which opens/closes the menu.
     ///
     /// - Parameters:
@@ -35,10 +42,12 @@ extension UIViewController {
 
     @objc
     func toggleMenu() {
-        if let anyMenuViewController = AnyMenuViewController.lastInstance {
-            if anyMenuViewController.menuState == .open {
+        if let anyMenuViewController = anyMenuViewController {
+            switch anyMenuViewController.menuState {
+            case .open:
                 anyMenuViewController.closeMenu()
-            } else {
+
+            case .closed:
                 anyMenuViewController.openMenu()
             }
         }

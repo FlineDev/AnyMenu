@@ -18,13 +18,14 @@ public class AnyMenuViewController: UIViewController {
     }
 
     // MARK: - Stored Type Properties
-    static weak var lastInstance: AnyMenuViewController?
+    static weak var shared: AnyMenuViewController?
 
     // MARK: - Stored Instance Properties
     /// The menu view controller which contains the menu.
     public var menuViewController: UIViewController {
         didSet {
             configureMenuViewController()
+            configureMenuOverlaysContent()
         }
     }
 
@@ -32,6 +33,7 @@ public class AnyMenuViewController: UIViewController {
     public var contentViewController: UIViewController {
         didSet {
             configureContentViewController()
+            configureMenuOverlaysContent()
         }
     }
 
@@ -61,7 +63,7 @@ public class AnyMenuViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        AnyMenuViewController.lastInstance = self
+        AnyMenuViewController.shared = self
         configureMenuViewController()
         configureContentViewController()
         configureMenuOverlaysContent()

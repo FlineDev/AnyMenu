@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - App Lifecycle Methods
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let menuViewController = MenuViewController()
-        let initialContentViewController = ContentViewController(backgroundColor: .lightGray)
+        let initialContentViewController = ContentViewController(backgroundColor: .darkGray)
 
         let anyMenuViewController = AnyMenuViewController(
             menuViewController: menuViewController,
