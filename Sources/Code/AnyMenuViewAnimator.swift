@@ -55,7 +55,7 @@ internal class AnyMenuViewAnimator: NSObject {
             }
         }
 
-        return transforms.reduce(CGAffineTransform.identity, { $0.concatenating($1) })
+        return transforms.reduce(CGAffineTransform.identity) { $0.concatenating($1) }
     }
 
     // MARK: - Instance Methods

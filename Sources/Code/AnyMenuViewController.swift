@@ -54,8 +54,8 @@ public class AnyMenuViewController: UIViewController {
     /// - Parameters:
     ///   - menuViewController: The menu view controller which contains the menu.
     ///   - contentViewController: The initial content view controller to be shown.
-    public required init(menuViewController: UIViewController, contentViewController: UIViewController,
-                         menuOverlaysContent: Bool, menuViewAnimation: MenuAnimation, contentViewAnimation: MenuAnimation) {
+    public required init(menuViewController: UIViewController, contentViewController: UIViewController, menuOverlaysContent: Bool,
+                         menuViewAnimation: MenuAnimation = .none, contentViewAnimation: MenuAnimation = .default) {
         self.menuViewController = menuViewController
         self.contentViewController = contentViewController
         self.menuOverlaysContent = menuOverlaysContent

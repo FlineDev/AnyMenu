@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
   s.name         = "AnyMenu"
   s.version      = "1.0.0"
-  s.summary      = "A menu framework for any use case."
+  s.summary      = "An easy to use menu framework for any styling use case."
 
   s.description  = <<-DESC
     Create your own menu from anywhere with any transition you like.
