@@ -23,6 +23,7 @@
 		2E1934641F60944200C8DC5A /* MenuIconType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1934621F60944200C8DC5A /* MenuIconType.swift */; };
 		2E1934651F60944200C8DC5A /* MenuIconType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1934621F60944200C8DC5A /* MenuIconType.swift */; };
 		2E1934661F60944200C8DC5A /* MenuIconType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1934621F60944200C8DC5A /* MenuIconType.swift */; };
+		0F78EFA41F60167500DC5BAE /* AnyMenuViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F78EFA31F60167500DC5BAE /* AnyMenuViewAnimator.swift */; };
 		0FF874FC1F60399400574EBE /* MenuAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF874FB1F60399400574EBE /* MenuAnimation.swift */; };
 		0FF874FD1F6039B200574EBE /* MenuAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF874FB1F60399400574EBE /* MenuAnimation.swift */; };
 		0FF874FE1F6039B300574EBE /* MenuAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF874FB1F60399400574EBE /* MenuAnimation.swift */; };
@@ -117,6 +118,7 @@
 		2E1934581F603C3400C8DC5A /* MenuIconGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuIconGenerator.swift; sourceTree = "<group>"; };
 		2E19345D1F60906300C8DC5A /* MenuIconConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuIconConfig.swift; sourceTree = "<group>"; };
 		2E1934621F60944200C8DC5A /* MenuIconType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuIconType.swift; sourceTree = "<group>"; };
+		0F78EFA31F60167500DC5BAE /* AnyMenuViewAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyMenuViewAnimator.swift; sourceTree = "<group>"; };
 		0FF874FB1F60399400574EBE /* MenuAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuAnimation.swift; sourceTree = "<group>"; };
 		2E97FE641F5F0DB4006605C5 /* AnyMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyMenuViewController.swift; sourceTree = "<group>"; };
 		A102BD3E1F02355A000C6B38 /* AnyMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AnyMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -254,6 +256,7 @@
 				2E1934581F603C3400C8DC5A /* MenuIconGenerator.swift */,
 				2E19345D1F60906300C8DC5A /* MenuIconConfig.swift */,
 				2E1934621F60944200C8DC5A /* MenuIconType.swift */,
+				0F78EFA31F60167500DC5BAE /* AnyMenuViewAnimator.swift */,
 				0FF874FB1F60399400574EBE /* MenuAnimation.swift */,
 			);
 			path = Code;
@@ -754,6 +757,7 @@
 				2E1934631F60944200C8DC5A /* MenuIconType.swift in Sources */,
 				2E97FE651F5F0DB4006605C5 /* AnyMenuViewController.swift in Sources */,
 				0FF874FC1F60399400574EBE /* MenuAnimation.swift in Sources */,
+				0F78EFA41F60167500DC5BAE /* AnyMenuViewAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
