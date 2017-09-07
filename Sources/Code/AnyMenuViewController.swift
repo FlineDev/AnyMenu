@@ -39,6 +39,8 @@ public class AnyMenuViewController: UIViewController {
 
     private let menuOverlaysContent: Bool
 
+    private var animator: AnyMenuViewAnimator
+
     /// The current menu state.
     public private(set) var menuState: MenuState = .closed
 
@@ -48,11 +50,12 @@ public class AnyMenuViewController: UIViewController {
     /// - Parameters:
     ///   - menuViewController: The menu view controller which contains the menu.
     ///   - contentViewController: The initial content view controller to be shown.
-    public required init(menuViewController: UIViewController, contentViewController: UIViewController, menuOverlaysContent: Bool) {
+    public required init(menuViewController: UIViewController, contentViewController: UIViewController,
+                         menuOverlaysContent: Bool, menuViewAnimation: MenuAnimation, contentViewAnimation: MenuAnimation) {
         self.menuViewController = menuViewController
         self.contentViewController = contentViewController
         self.menuOverlaysContent = menuOverlaysContent
-
+        self.animator = AnyMenuViewAnimator(menuViewAnimation: menuViewAnimation, contentViewAnimation: contentViewAnimation)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -83,6 +86,10 @@ public class AnyMenuViewController: UIViewController {
         menuViewController.view.frame = view.bounds
         view.addSubview(menuViewController.view)
         menuViewController.didMove(toParentViewController: self)
+        animator.menuView = menuViewController.view
+
+        // TODO: remove soon
+        menuViewController.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTriggerCloseMenu)))
     }
 
     private func configureContentViewController(oldContentViewController: UIViewController? = nil) {
@@ -98,24 +105,33 @@ public class AnyMenuViewController: UIViewController {
         contentViewController.view.frame = view.bounds
         view.addSubview(contentViewController.view)
         menuViewController.didMove(toParentViewController: self)
+        animator.contentView = contentViewController.view
     }
 
     private func configureMenuOverlaysContent() {
         view.bringSubview(toFront: menuOverlaysContent ? menuViewController.view : contentViewController.view)
     }
 
+    @objc
+    private func didPressMenuButton() {
+        openMenu()
+    }
+
+    @objc
+    private func didTriggerCloseMenu() {
+        closeMenu()
+    }
+
     /// Opens the menu.
     public func openMenu() {
         menuState = .open
-
-        // TODO: not yet implemented
+        animator.startAnimation(for: .open)
     }
 
     /// Closes the menu.
     public func closeMenu() {
         menuState = .closed
-
-        // TODO: not yet implemented
+        animator.startAnimation(for: .closed)
     }
 
     /// Present menu view controller in a UIWindow.
