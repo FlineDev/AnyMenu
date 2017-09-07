@@ -27,15 +27,14 @@ class ContentViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = backgroundColor
-        navigationItem.leftBarButtonItem = makeMenuBarButtonItem(menuIconType: .default)
-        // NOTE: uncomment the following and comment the above to shop menu button
-//        view.addSubview(makeButton(menuIconType: .default))
-    }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        // TODO: move the following to viewDidLoad
-        navigationItem.leftBarButtonItem = makeMenuBarButtonItem(menuIconType: .default)
+        // add menu button
+        if navigationController != nil {
+            navigationItem.leftBarButtonItem = makeMenuBarButtonItem(menuIconType: .default)
+        } else {
+            let menuButton = makeButton(menuIconType: .default)
+            // set the frame of the menuButton
+            view.addSubview(menuButton)
+        }
     }
 }

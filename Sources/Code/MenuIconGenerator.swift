@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import QuartzCore
 
 class MenuIconGenerator {
     // MARK: - Type Methods
@@ -31,21 +30,21 @@ class MenuIconGenerator {
     static func generateMenuIcon(config: MenuIconConfig) -> UIImage {
         // create iconView with given configuration
         let height = CGFloat(config.lineConfig.count) * (config.lineConfig.height + config.lineConfig.verticalGap) - config.lineConfig.verticalGap
-        let iconView = UIView(frame: CGRect(x: 0, y: 0, width: config.width, height: height))
-        iconView.backgroundColor = .clear
+        let iconShapeLayer = CAShapeLayer()
+        iconShapeLayer.frame = CGRect(x: 0, y: 0, width: config.width, height: height)
+        iconShapeLayer.backgroundColor = UIColor.clear.cgColor
 
         for lineIndex in 0..<config.lineConfig.count {
             let yOffset = CGFloat(lineIndex) * (config.lineConfig.height + config.lineConfig.verticalGap)
-            let lineView = UIView(frame: CGRect(x: 0, y: yOffset, width: config.width, height: config.lineConfig.height))
-            lineView.backgroundColor = .black
-            lineView.layer.cornerRadius = config.lineConfig.cornerRadius
-            iconView.addSubview(lineView)
+            let lineShapeLayer = CAShapeLayer()
+            lineShapeLayer.frame = CGRect(x: 0, y: yOffset, width: config.width, height: config.lineConfig.height)
+            lineShapeLayer.backgroundColor = UIColor.black.cgColor
+            lineShapeLayer.cornerRadius = config.lineConfig.cornerRadius
+            iconShapeLayer.addSublayer(lineShapeLayer)
         }
 
         // take screenshot of iconView and return it
-        UIGraphicsBeginImageContextWithOptions(iconView.frame.size, false, UIScreen.main.scale)
-        defer { UIGraphicsEndImageContext() }
-        iconView.drawHierarchy(in: iconView.bounds, afterScreenUpdates: true)
-        return UIGraphicsGetImageFromCurrentImageContext()!
+        let imageRenderer = UIGraphicsImageRenderer(size: iconShapeLayer.bounds.size)
+        return imageRenderer.image { iconShapeLayer.render(in: $0.cgContext) }
     }
 }
