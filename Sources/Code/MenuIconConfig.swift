@@ -44,7 +44,7 @@ public struct MenuIconConfig {
     ///   - width: The width of the resuliting icon image.
     ///   - color: The color of the Menu button.
     ///   - lineConfig: The configuration for the lines.
-    public init(width: CGFloat = 27.0, lineConfig: LineConfig = LineConfig()) {
+    public init(width: CGFloat = 25.0, lineConfig: LineConfig = LineConfig()) {
         self.width = width
         self.lineConfig = lineConfig
     }

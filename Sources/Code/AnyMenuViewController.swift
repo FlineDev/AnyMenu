@@ -24,6 +24,8 @@ public class AnyMenuViewController: UIViewController {
     /// The menu view controller which contains the menu.
     public var menuViewController: UIViewController {
         didSet {
+            guard oldValue !== menuViewController else { return }
+
             configureMenuViewController()
             configureMenuOverlaysContent()
         }
@@ -32,6 +34,8 @@ public class AnyMenuViewController: UIViewController {
     /// The current content view controller to be shown.
     public var contentViewController: UIViewController {
         didSet {
+            guard oldValue !== contentViewController else { return }
+
             configureContentViewController()
             configureMenuOverlaysContent()
         }
