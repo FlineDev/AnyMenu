@@ -87,9 +87,6 @@ public class AnyMenuViewController: UIViewController {
         view.addSubview(menuViewController.view)
         menuViewController.didMove(toParentViewController: self)
         animator.menuView = menuViewController.view
-
-        // TODO: remove soon
-        menuViewController.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTriggerCloseMenu)))
     }
 
     private func configureContentViewController(oldContentViewController: UIViewController? = nil) {

@@ -13,7 +13,7 @@ class MenuViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .lightGray
+        view.backgroundColor = UIColor.white
     }
 
     // MARK: - UITableViewDataSource Protocol Implementation
@@ -50,9 +50,11 @@ class MenuViewController: UITableViewController {
         switch indexPath.row {
         case 0:
             anyMenuViewController?.contentViewController = ContentViewController(backgroundColor: .yellow)
+            anyMenuViewController?.closeMenu()
 
         case 1:
             anyMenuViewController?.contentViewController = UINavigationController(rootViewController: ContentViewController(backgroundColor: .blue))
+            anyMenuViewController?.closeMenu()
 
         default:
             fatalError()
