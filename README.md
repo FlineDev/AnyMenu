@@ -71,8 +71,7 @@ Refer to [CocoaPods.org](https://cocoapods.org) for detailed / updates instructi
 
 ## Usage
 
-Please have a look at the UsageExamples.playground for a complete list of features provided.
-Open the Playground from within the `.xcworkspace` in order for it to work.
+Please have a look at the **Demo project** for a complete example on how to use this framework.
 
 ---
 #### Features Overview
