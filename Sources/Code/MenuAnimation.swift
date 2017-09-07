@@ -38,7 +38,12 @@ public struct MenuAnimation {
 
 /// Pre configured menu animations
 extension MenuAnimation {
-    /// Default animation for menu transitions.
+    /// Empy animation
+    public static let none = MenuAnimation(
+        duration: 0, actions: [], timingParameters: UICubicTimingParameters(animationCurve: .linear)
+    )
+
+    /// Default animation
     public static let `default` = MenuAnimation(
         duration: 0.3, actions: [.translate(x: 300, y: 0)], timingParameters: UICubicTimingParameters(animationCurve: .easeOut)
     )

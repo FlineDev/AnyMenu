@@ -22,7 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let anyMenuViewController = AnyMenuViewController(
             menuViewController: menuViewController,
             contentViewController: UINavigationController(rootViewController: initialContentViewController),
-            menuOverlaysContent: false
+            menuOverlaysContent: false,
+            menuViewAnimation: .none,
+            contentViewAnimation: .default
         )
         anyMenuViewController.present(in: &window)
 
