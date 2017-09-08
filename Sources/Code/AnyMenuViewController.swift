@@ -26,7 +26,7 @@ public class AnyMenuViewController: UIViewController {
         didSet {
             guard oldValue !== menuViewController else { return }
 
-            configureMenuViewController()
+            configureMenuViewController(oldMenuViewController: oldValue)
             configureMenuOverlaysContent()
         }
     }
@@ -36,7 +36,7 @@ public class AnyMenuViewController: UIViewController {
         didSet {
             guard oldValue !== contentViewController else { return }
 
-            configureContentViewController()
+            configureContentViewController(oldContentViewController: oldValue)
             configureMenuOverlaysContent()
         }
     }
