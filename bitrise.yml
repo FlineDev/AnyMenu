@@ -43,4 +43,4 @@ app:
     BITRISE_PROJECT_PATH: AnyMenu.xcodeproj
   - opts:
       is_expand: false
-    BITRISE_SCHEME: AnyMenu iOS
+    BITRISE_SCHEME: AnyMenu

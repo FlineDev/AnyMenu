@@ -15,9 +15,7 @@ Pod::Spec.new do |s|
   s.author             = { "Cihat Gündüz" => "CihatGuenduez@posteo.de" }
   s.social_media_url   = "https://twitter.com/Dschee"
 
-  s.ios.deployment_target = "11.0"
-  s.osx.deployment_target = "10.13"
-  s.tvos.deployment_target = "11.0"
+  s.ios.deployment_target = "10.0"
 
   s.source       = { :git => "https://github.com/Flinesoft/AnyMenu.git", :tag => "#{s.version}" }
   s.source_files = "Sources", "Sources/**/*.swift"
