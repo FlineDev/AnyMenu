@@ -21,13 +21,18 @@ public class AnyMenuViewController: UIViewController {
     static weak var shared: AnyMenuViewController?
 
     // MARK: - Stored Instance Properties
+    private var menuContainerView: UIView!
+
+    private var contentContainerView: UIView!
+
     /// The menu view controller which contains the menu.
     public var menuViewController: UIViewController {
         didSet {
             guard oldValue !== menuViewController else { return }
 
-            configureMenuViewController(oldMenuViewController: oldValue)
-            configureMenuOverlaysContent()
+            if isViewLoaded {
+                configureMenuViewController(oldMenuViewController: oldValue)
+            }
         }
     }
 
@@ -36,8 +41,9 @@ public class AnyMenuViewController: UIViewController {
         didSet {
             guard oldValue !== contentViewController else { return }
 
-            configureContentViewController(oldContentViewController: oldValue)
-            configureMenuOverlaysContent()
+            if isViewLoaded {
+                configureContentViewController(oldContentViewController: oldValue)
+            }
         }
     }
 
@@ -70,10 +76,36 @@ public class AnyMenuViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
 
+        if menuContainerView == nil {
+            menuContainerView = UIView(frame: view.bounds)
+            menuContainerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            menuContainerView.translatesAutoresizingMaskIntoConstraints = true
+            menuContainerView.backgroundColor = .clear
+
+            view.addSubview(menuContainerView)
+        }
+
+        if contentContainerView == nil {
+            contentContainerView = UIView(frame: view.bounds)
+            contentContainerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            contentContainerView.translatesAutoresizingMaskIntoConstraints = true
+            contentContainerView.backgroundColor = .clear
+
+            view.addSubview(contentContainerView)
+        }
+
+        if menuOverlaysContent {
+            view.bringSubview(toFront: menuContainerView)
+        } else {
+            view.bringSubview(toFront: contentContainerView)
+        }
+
+        animator.menuView = menuContainerView
+        animator.contentView = contentContainerView
+
         AnyMenuViewController.shared = self
         configureMenuViewController()
         configureContentViewController()
-        configureMenuOverlaysContent()
     }
 
     // MARK: - Instance Methods
@@ -87,10 +119,9 @@ public class AnyMenuViewController: UIViewController {
 
         // add new menu view controller
         addChildViewController(menuViewController)
-        menuViewController.view.frame = view.bounds
-        view.addSubview(menuViewController.view)
+        menuViewController.view.frame = menuContainerView.bounds
+        menuContainerView.addSubview(menuViewController.view)
         menuViewController.didMove(toParentViewController: self)
-        animator.menuView = menuViewController.view
     }
 
     private func configureContentViewController(oldContentViewController: UIViewController? = nil) {
@@ -103,14 +134,9 @@ public class AnyMenuViewController: UIViewController {
 
         // add new content view controller
         addChildViewController(contentViewController)
-        contentViewController.view.frame = view.bounds
-        view.addSubview(contentViewController.view)
+        contentViewController.view.frame = contentContainerView.bounds
+        contentContainerView.addSubview(contentViewController.view)
         menuViewController.didMove(toParentViewController: self)
-        animator.contentView = contentViewController.view
-    }
-
-    private func configureMenuOverlaysContent() {
-        view.bringSubview(toFront: menuOverlaysContent ? menuViewController.view : contentViewController.view)
     }
 
     @objc
