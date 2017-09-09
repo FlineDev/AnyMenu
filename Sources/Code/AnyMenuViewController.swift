@@ -120,6 +120,8 @@ public class AnyMenuViewController: UIViewController {
         // add new menu view controller
         addChildViewController(menuViewController)
         menuViewController.view.frame = menuContainerView.bounds
+        menuViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        menuViewController.view.translatesAutoresizingMaskIntoConstraints = true
         menuContainerView.addSubview(menuViewController.view)
         menuViewController.didMove(toParentViewController: self)
     }
@@ -135,6 +137,8 @@ public class AnyMenuViewController: UIViewController {
         // add new content view controller
         addChildViewController(contentViewController)
         contentViewController.view.frame = contentContainerView.bounds
+        contentViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        contentViewController.view.translatesAutoresizingMaskIntoConstraints = true
         contentContainerView.addSubview(contentViewController.view)
         menuViewController.didMove(toParentViewController: self)
     }
