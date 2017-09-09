@@ -76,6 +76,16 @@ public class AnyMenuViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
 
+        configureViews()
+        configureAnimator()
+
+        AnyMenuViewController.shared = self
+        configureMenuViewController()
+        configureContentViewController()
+    }
+
+    // MARK: - Instance Methods
+    private func configureViews() {
         if menuContainerView == nil {
             menuContainerView = UIView(frame: view.bounds)
             menuContainerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -94,21 +104,14 @@ public class AnyMenuViewController: UIViewController {
             view.addSubview(contentContainerView)
         }
 
-        if menuOverlaysContent {
-            view.bringSubview(toFront: menuContainerView)
-        } else {
-            view.bringSubview(toFront: contentContainerView)
-        }
-
-        animator.menuView = menuContainerView
-        animator.contentView = contentContainerView
-
-        AnyMenuViewController.shared = self
-        configureMenuViewController()
-        configureContentViewController()
+        view.bringSubview(toFront: menuOverlaysContent ? menuContainerView : contentContainerView)
     }
 
-    // MARK: - Instance Methods
+    private func configureAnimator() {
+        animator.menuView = menuContainerView
+        animator.contentView = contentContainerView
+    }
+
     private func configureMenuViewController(oldMenuViewController: UIViewController? = nil) {
         // remove old menu view controller if any
         if let oldMenuViewController = oldMenuViewController {
