@@ -46,6 +46,14 @@ public class AnyMenuViewController: UIViewController {
         }
     }
 
+    open override var childViewControllerForStatusBarStyle: UIViewController? {
+        return menuState == .closed ? contentViewController : menuViewController
+    }
+
+    open override var childViewControllerForStatusBarHidden: UIViewController? {
+        return menuState == .closed ? contentViewController : menuViewController
+    }
+
     private let menuOverlaysContent: Bool
     private var animator: AnyMenuViewAnimator
 
