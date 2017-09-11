@@ -22,7 +22,6 @@ public class AnyMenuViewController: UIViewController {
 
     // MARK: - Stored Instance Properties
     private var menuContainerView: UIView!
-
     private var contentContainerView: UIView!
 
     /// The menu view controller which contains the menu.
@@ -48,7 +47,6 @@ public class AnyMenuViewController: UIViewController {
     }
 
     private let menuOverlaysContent: Bool
-
     private var animator: AnyMenuViewAnimator
 
     /// The current menu state.
