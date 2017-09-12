@@ -47,12 +47,12 @@ public class AnyMenuViewController: UIViewController {
     }
 
     /// Returns a childViewController for the status bar style.
-    open override var childViewControllerForStatusBarStyle: UIViewController? {
+    public override var childViewControllerForStatusBarStyle: UIViewController? {
         return menuState == .closed ? contentViewController : menuViewController
     }
 
     /// Returns a childViewController for status bar visibility.
-    open override var childViewControllerForStatusBarHidden: UIViewController? {
+    public override var childViewControllerForStatusBarHidden: UIViewController? {
         return menuState == .closed ? contentViewController : menuViewController
     }
 

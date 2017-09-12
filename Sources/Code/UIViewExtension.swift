@@ -9,60 +9,18 @@
 import UIKit
 
 extension UIView {
-    /**
+    /// Returns the views whose types match the specified value potentially including the view itself.
+    ///
+    /// - Note: This method searches the current view and all of its subviews for the specified views.
+    ///
+    /// - Parameters:
+    ///   - type: The `Type` value to search for.
+    ///
+    /// - Returns: Array with the views in the receiver’s hierarchy whose types match.
+    internal func viewsInHierarchy<T: UIView>(ofType type: T.Type) -> [T] {
+        let viewsFoundInSubviews = subviews.map { $0.viewsInHierarchy(ofType: T.self) }.joined()
 
-     Returns the views whose types matches the specified value.
-
-     - note: This method searches the current view and all of its subviews for the specified views.
-
-     - parameters:
-     - type The `Type` value to search for.
-
-     - returns: `Array<Type>` Array with the views in the receiver’s hierarchy whose types match the value in the `Type` parameter.
-
-     */
-    internal func viewsOfType<T: UIView>(_ type: T.Type) -> [T] {
-        var results = [T]()
-        var stack: [UIView] = [self]
-
-        while !stack.isEmpty {
-            if let view = stack.popLast() {
-                if let view = view as? T {
-                    results.append(view)
-                }
-
-                stack.append(contentsOf: view.subviews)
-            }
-        }
-
-        return results
-    }
-
-    /**
-
-     Returns the view whose type matches the specified value.
-
-     - note: This method searches the current view and all of its subviews for the specified view.
-
-     - parameters:
-     - type The `Type` value to search for.
-
-     - returns: `Optional(Type)` The view in the receiver’s hierarchy whose type matches the value in the `Type` parameter or nil if not found.
-
-     */
-    internal func viewOfType<T: UIView>(_ type: T.Type) -> T? {
-        var stack: [UIView] = [self]
-
-        while !stack.isEmpty {
-            if let view = stack.popLast() {
-                if let view = view as? T {
-                    return view
-                }
-
-                stack.append(contentsOf: view.subviews)
-            }
-        }
-
-        return nil
+        guard let expectedTypeSelf = self as? T else { return Array(viewsFoundInSubviews) }
+        return [expectedTypeSelf] + Array(viewsFoundInSubviews)
     }
 }

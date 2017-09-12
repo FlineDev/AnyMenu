@@ -219,7 +219,7 @@ internal class AnyMenuViewAnimator: NSObject {
             tapGestureRecognizer!.numberOfTouchesRequired = 1
 
             // Add gesture recognizer priority to overlay view controller if contains scroll view
-            let scrollViews = viewController.contentContainerView.viewsOfType(UIScrollView.self)
+            let scrollViews = viewController.contentContainerView.viewsInHierarchy(ofType: UIScrollView.self)
             let gestureRecognizers = scrollViews.flatMap { $0.gestureRecognizers ?? [] }
 
             for gestureRecognizer in gestureRecognizers where gestureRecognizer is UIPanGestureRecognizer {
