@@ -46,10 +46,12 @@ public class AnyMenuViewController: UIViewController {
         }
     }
 
+    /// Returns a childViewController for the status bar style.
     open override var childViewControllerForStatusBarStyle: UIViewController? {
         return menuState == .closed ? contentViewController : menuViewController
     }
 
+    /// Returns a childViewController for status bar visibility.
     open override var childViewControllerForStatusBarHidden: UIViewController? {
         return menuState == .closed ? contentViewController : menuViewController
     }
@@ -59,7 +61,11 @@ public class AnyMenuViewController: UIViewController {
     private var animator: AnyMenuViewAnimator!
 
     /// The current menu state.
-    public internal(set) var menuState: MenuState = .closed
+    public internal(set) var menuState: MenuState = .closed {
+        didSet {
+            setNeedsStatusBarAppearanceUpdate()
+        }
+    }
 
     // MARK: - Initializers
     /// Creates a new menu container view controller.
@@ -67,7 +73,8 @@ public class AnyMenuViewController: UIViewController {
     /// - Parameters:
     ///   - menuViewController: The menu view controller which contains the menu.
     ///   - contentViewController: The initial content view controller to be shown.
-    public required init(menuViewController: UIViewController, contentViewController: UIViewController, menuOverlaysContent: Bool, animation: MenuAnimation = .default) {
+    public required init(menuViewController: UIViewController, contentViewController: UIViewController,
+                         menuOverlaysContent: Bool, animation: MenuAnimation = .default) {
         self.menuViewController = menuViewController
         self.contentViewController = contentViewController
         self.menuOverlaysContent = menuOverlaysContent
