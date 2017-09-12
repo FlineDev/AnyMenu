@@ -17,6 +17,7 @@
 		0085B13B1F62AFA50021757C /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0085B12D1F62AFA50021757C /* UIViewControllerExtension.swift */; };
 		0085B13C1F62AFA50021757C /* AnyMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 0085B12F1F62AFA50021757C /* AnyMenu.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0085B1441F62AFAB0021757C /* ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0085B1411F62AFAB0021757C /* ExampleTests.swift */; };
+		0FF133E81F67AF4B00D1DA2D /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF133E71F67AF4B00D1DA2D /* UIViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		0085B14D1F62B0060021757C /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		0085B14E1F62B0060021757C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0085B1501F62B0F90021757C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
+		0FF133E71F67AF4B00D1DA2D /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				0085B12B1F62AFA50021757C /* MenuIconGenerator.swift */,
 				0085B12C1F62AFA50021757C /* MenuIconType.swift */,
 				0085B12D1F62AFA50021757C /* UIViewControllerExtension.swift */,
+				0FF133E71F67AF4B00D1DA2D /* UIViewExtension.swift */,
 			);
 			path = Code;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				0085B1351F62AFA50021757C /* AnyMenuViewAnimator.swift in Sources */,
 				0085B1381F62AFA50021757C /* MenuIconConfig.swift in Sources */,
 				0085B13B1F62AFA50021757C /* UIViewControllerExtension.swift in Sources */,
+				0FF133E81F67AF4B00D1DA2D /* UIViewExtension.swift in Sources */,
 				0085B13A1F62AFA50021757C /* MenuIconType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
