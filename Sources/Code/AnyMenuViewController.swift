@@ -129,6 +129,7 @@ public class AnyMenuViewController: UIViewController {
             menuContainerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             menuContainerView.translatesAutoresizingMaskIntoConstraints = true
             menuContainerView.backgroundColor = .clear
+            menuContainerView.clipsToBounds = true
 
             view.addSubview(menuContainerView)
         }
@@ -138,6 +139,7 @@ public class AnyMenuViewController: UIViewController {
             contentContainerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             contentContainerView.translatesAutoresizingMaskIntoConstraints = true
             contentContainerView.backgroundColor = .clear
+            contentContainerView.clipsToBounds = true
 
             view.addSubview(contentContainerView)
         }
