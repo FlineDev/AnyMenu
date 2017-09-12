@@ -9,9 +9,16 @@
 import UIKit
 
 class MenuViewController: UITableViewController {
+    // MARK: - Computed Instance Properties
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+
     // MARK: - View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "basicCell")
 
         view.backgroundColor = UIColor.white
     }
@@ -22,11 +29,11 @@ class MenuViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "basicCell")!
         cell.backgroundColor = .clear
 
         switch indexPath.row {
@@ -36,6 +43,10 @@ class MenuViewController: UITableViewController {
 
         case 1:
             cell.textLabel?.text = "Blue with NavigationBar"
+            return cell
+
+        case 2:
+            cell.textLabel?.text = "Black with Light StatusBar"
             return cell
 
         default:
@@ -56,6 +67,9 @@ class MenuViewController: UITableViewController {
             anyMenuViewController?.contentViewController = UINavigationController(rootViewController: ContentViewController(backgroundColor: .blue))
             anyMenuViewController?.closeMenu()
 
+        case 2:
+            anyMenuViewController?.contentViewController = LightStatusBarViewController(backgroundColor: .black)
+            anyMenuViewController?.closeMenu()
         default:
             fatalError()
         }

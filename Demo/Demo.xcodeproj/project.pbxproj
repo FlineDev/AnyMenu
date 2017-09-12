@@ -16,6 +16,7 @@
 		00559C681F62B2D9000FCAB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00559C611F62B2D9000FCAB0 /* LaunchScreen.storyboard */; };
 		00559C6B1F62B325000FCAB0 /* AnyMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00559C6A1F62B325000FCAB0 /* AnyMenu.framework */; };
 		00559C6C1F62B325000FCAB0 /* AnyMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 00559C6A1F62B325000FCAB0 /* AnyMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0FF133EA1F67B3AA00D1DA2D /* LightStatusBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF133E91F67B3AA00D1DA2D /* LightStatusBarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		00559C621F62B2D9000FCAB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		00559C631F62B2D9000FCAB0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00559C6A1F62B325000FCAB0 /* AnyMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AnyMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0FF133E91F67B3AA00D1DA2D /* LightStatusBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightStatusBarViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 				00559C5C1F62B2D9000FCAB0 /* AppDelegate.swift */,
 				00559C5D1F62B2D9000FCAB0 /* ContentViewController.swift */,
 				00559C5E1F62B2D9000FCAB0 /* MenuViewController.swift */,
+				0FF133E91F67B3AA00D1DA2D /* LightStatusBarViewController.swift */,
 			);
 			path = Code;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00559C651F62B2D9000FCAB0 /* ContentViewController.swift in Sources */,
+				0FF133EA1F67B3AA00D1DA2D /* LightStatusBarViewController.swift in Sources */,
 				00559C661F62B2D9000FCAB0 /* MenuViewController.swift in Sources */,
 				00559C641F62B2D9000FCAB0 /* AppDelegate.swift in Sources */,
 			);

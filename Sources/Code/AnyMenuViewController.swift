@@ -21,8 +21,8 @@ public class AnyMenuViewController: UIViewController {
     static weak var shared: AnyMenuViewController?
 
     // MARK: - Stored Instance Properties
-    private var menuContainerView: UIView!
-    private var contentContainerView: UIView!
+    internal var menuContainerView: UIView!
+    internal var contentContainerView: UIView!
 
     /// The menu view controller which contains the menu.
     public var menuViewController: UIViewController {
@@ -46,11 +46,26 @@ public class AnyMenuViewController: UIViewController {
         }
     }
 
+    /// Returns a childViewController for the status bar style.
+    public override var childViewControllerForStatusBarStyle: UIViewController? {
+        return menuState == .closed ? contentViewController : menuViewController
+    }
+
+    /// Returns a childViewController for status bar visibility.
+    public override var childViewControllerForStatusBarHidden: UIViewController? {
+        return menuState == .closed ? contentViewController : menuViewController
+    }
+
     private let menuOverlaysContent: Bool
-    private var animator: AnyMenuViewAnimator
+
+    private var animator: AnyMenuViewAnimator!
 
     /// The current menu state.
-    public private(set) var menuState: MenuState = .closed
+    public internal(set) var menuState: MenuState = .closed {
+        didSet {
+            setNeedsStatusBarAppearanceUpdate()
+        }
+    }
 
     // MARK: - Initializers
     /// Creates a new menu container view controller.
@@ -58,13 +73,13 @@ public class AnyMenuViewController: UIViewController {
     /// - Parameters:
     ///   - menuViewController: The menu view controller which contains the menu.
     ///   - contentViewController: The initial content view controller to be shown.
-    public required init(menuViewController: UIViewController, contentViewController: UIViewController, menuOverlaysContent: Bool,
-                         menuViewAnimation: MenuAnimation = .none, contentViewAnimation: MenuAnimation = .default) {
+    public required init(menuViewController: UIViewController, contentViewController: UIViewController,
+                         menuOverlaysContent: Bool, animation: MenuAnimation = .default) {
         self.menuViewController = menuViewController
         self.contentViewController = contentViewController
         self.menuOverlaysContent = menuOverlaysContent
-        self.animator = AnyMenuViewAnimator(menuViewAnimation: menuViewAnimation, contentViewAnimation: contentViewAnimation)
         super.init(nibName: nil, bundle: nil)
+        self.animator = AnyMenuViewAnimator(animation: animation)
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -75,11 +90,12 @@ public class AnyMenuViewController: UIViewController {
         super.viewDidLoad()
 
         configureViews()
-        configureAnimator()
 
         AnyMenuViewController.shared = self
         configureMenuViewController()
         configureContentViewController()
+
+        animator.configure(forViewController: self)
     }
 
     // MARK: - Instance Methods
@@ -103,11 +119,6 @@ public class AnyMenuViewController: UIViewController {
         }
 
         view.bringSubview(toFront: menuOverlaysContent ? menuContainerView : contentContainerView)
-    }
-
-    private func configureAnimator() {
-        animator.menuView = menuContainerView
-        animator.contentView = contentContainerView
     }
 
     private func configureMenuViewController(oldMenuViewController: UIViewController? = nil) {
