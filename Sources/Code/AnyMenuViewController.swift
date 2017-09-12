@@ -76,6 +76,7 @@ public class AnyMenuViewController: UIViewController {
     public internal(set) var menuState: MenuState = .closed {
         didSet {
             setNeedsStatusBarAppearanceUpdate()
+            contentContainerView.isUserInteractionEnabled = menuState == .closed
         }
     }
 
