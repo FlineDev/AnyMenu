@@ -8,6 +8,8 @@
 
 import UIKit
 
+// TODO: add support for menu overlays content
+
 internal class AnyMenuViewAnimator: NSObject {
     // MARK: - Stored Instance Properties
     fileprivate weak var viewController: AnyMenuViewController!
