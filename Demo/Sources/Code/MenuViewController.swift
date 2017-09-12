@@ -75,6 +75,7 @@ class MenuViewController: UITableViewController {
         case 2:
             anyMenuViewController?.contentViewController = LightStatusBarViewController(backgroundColor: .black)
             anyMenuViewController?.closeMenu()
+
         default:
             fatalError()
         }

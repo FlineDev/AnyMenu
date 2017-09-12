@@ -109,6 +109,7 @@ public class AnyMenuViewController: UIViewController {
         configureContentViewController()
 
         animator.configure(forViewController: self)
+        configureMenuViewFrame()
     }
 
     // MARK: - Instance Methods
@@ -194,6 +195,12 @@ public class AnyMenuViewController: UIViewController {
         contentViewController.view.translatesAutoresizingMaskIntoConstraints = true
         contentContainerView.addSubview(contentViewController.view)
         menuViewController.didMove(toParentViewController: self)
+    }
+
+    private func configureMenuViewFrame() {
+        let openMenuContentFrame = view.bounds.applying(animator.finalContentViewTransform)
+        menuViewController.view.frame.size.width = menuContainerView.frame.size.width - (menuContainerView.frame.size.width - openMenuContentFrame.origin.x)
+        // TODO: make sure the menu size calculation also works for top, bottom and right sided menu
     }
 
     @objc

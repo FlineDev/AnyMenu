@@ -16,12 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - App Lifecycle Methods
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let animation = MenuAnimation(
-            duration: 0.4,
-            menuViewActions: [],
-            contentViewActions: [.translate(x: UIScreen.main.bounds.width * 0.85, y: 0)],
-            timingParameters: UICubicTimingParameters(animationCurve: .easeOut)
-        )
         let menuViewController = MenuViewController()
         let initialContentViewController = ContentViewController(backgroundColor: .darkGray)
 
@@ -29,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             menuViewController: menuViewController,
             contentViewController: UINavigationController(rootViewController: initialContentViewController),
             menuOverlaysContent: false,
-            animation: animation
+            animation: .default
         )
         anyMenuViewController.present(in: &window)
 

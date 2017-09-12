@@ -20,7 +20,7 @@ internal class AnyMenuViewAnimator: NSObject {
     fileprivate var finalMenuViewTransform: CGAffineTransform!
 
     fileprivate var initialContentViewTransform: CGAffineTransform!
-    fileprivate var finalContentViewTransform: CGAffineTransform!
+    internal var finalContentViewTransform: CGAffineTransform!
 
     fileprivate var panGestureRecognizer: UIPanGestureRecognizer?
     fileprivate var screenEdgePanGestureRecognizer: UIScreenEdgePanGestureRecognizer?
