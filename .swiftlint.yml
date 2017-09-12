@@ -6,7 +6,6 @@ opt_in_rules:
 - explicit_init
 - file_header
 - first_where
-- implicit_return
 - let_var_whitespace
 - nimble_operator
 - no_extension_access_modifier
@@ -22,6 +21,9 @@ opt_in_rules:
 - trailing_closure
 - unneeded_parentheses_in_closure_argument
 - vertical_parameter_alignment_on_call
+
+disabled_rules:
+- todo
 
 included:
 - Sources
@@ -67,12 +69,6 @@ custom_rules:
     regex: '\(\S+\?\.\S+\)!'
     name: "Late Force Unwrapping"
     message: "Don't use ? first to force unwrap later – directly unwrap within the parantheses."
-    severity: warning
-  long_switch_case:
-    included: ".*.swift"
-    regex: 'case (?:let )?\.[^\n]+\n((?!\s*switch)[^\n\}]+\n){5,}?\s*(case|\})'
-    name: "Long Switch Cases"
-    message: "Use a maximum of 4 lines within each case."
     severity: warning
   missing_docs:
     included: ".*.swift"

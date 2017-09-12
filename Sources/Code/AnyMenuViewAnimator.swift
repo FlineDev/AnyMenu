@@ -20,7 +20,7 @@ internal class AnyMenuViewAnimator: NSObject {
     fileprivate var finalMenuViewTransform: CGAffineTransform!
 
     fileprivate var initialContentViewTransform: CGAffineTransform!
-    fileprivate var finalContentViewTransform: CGAffineTransform!
+    internal var finalContentViewTransform: CGAffineTransform!
 
     fileprivate var panGestureRecognizer: UIPanGestureRecognizer?
     fileprivate var screenEdgePanGestureRecognizer: UIScreenEdgePanGestureRecognizer?
@@ -299,8 +299,10 @@ extension AnyMenuViewAnimator: UIGestureRecognizerDelegate {
             let velocity = panGestureRecognizer!.velocity(in: viewController.view)
             let edges = calculateScreenEdgePanGestureRectEdges(for: animation.contentViewActions)
 
-            return ((edges.contains(.top) || edges.contains(.bottom)) && abs(velocity.y) > abs(velocity.x)) || ((edges.contains(.left) || edges.contains(.right)) && abs(velocity.x) > abs(velocity.y))
+            let left = ((edges.contains(.top) || edges.contains(.bottom)) && abs(velocity.y) > abs(velocity.x))
+            let right = ((edges.contains(.left) || edges.contains(.right)) && abs(velocity.x) > abs(velocity.y))
 
+            return left || right
         } else if gestureRecognizer === screenEdgePanGestureRecognizer {
             return viewController.menuState == .closed
         } else if gestureRecognizer === tapGestureRecognizer {

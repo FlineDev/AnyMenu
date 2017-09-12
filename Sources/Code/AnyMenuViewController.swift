@@ -21,8 +21,20 @@ public class AnyMenuViewController: UIViewController {
     static weak var shared: AnyMenuViewController?
 
     // MARK: - Stored Instance Properties
+    internal var backgroundContainerView: UIView!
     internal var menuContainerView: UIView!
     internal var contentContainerView: UIView!
+
+    /// The background view controller which is the background of the menu.
+    public var backgroundViewController: UIViewController? {
+        didSet {
+            guard oldValue !== backgroundViewController else { return }
+
+            if isViewLoaded {
+                configureBackgroundViewController(oldBackgroundViewController: backgroundViewController)
+            }
+        }
+    }
 
     /// The menu view controller which contains the menu.
     public var menuViewController: UIViewController {
@@ -92,14 +104,25 @@ public class AnyMenuViewController: UIViewController {
         configureViews()
 
         AnyMenuViewController.shared = self
+
         configureMenuViewController()
         configureContentViewController()
 
         animator.configure(forViewController: self)
+        configureMenuViewFrame()
     }
 
     // MARK: - Instance Methods
     private func configureViews() {
+        if backgroundContainerView == nil {
+            backgroundContainerView = UIView(frame: view.bounds)
+            backgroundContainerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            backgroundContainerView.translatesAutoresizingMaskIntoConstraints = true
+            backgroundContainerView.backgroundColor = .clear
+
+            view.addSubview(backgroundContainerView)
+        }
+
         if menuContainerView == nil {
             menuContainerView = UIView(frame: view.bounds)
             menuContainerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -119,6 +142,25 @@ public class AnyMenuViewController: UIViewController {
         }
 
         view.bringSubview(toFront: menuOverlaysContent ? menuContainerView : contentContainerView)
+    }
+
+    private func configureBackgroundViewController(oldBackgroundViewController: UIViewController?) {
+        // remove old background view controller if any
+        if let oldBackgroundViewController = oldBackgroundViewController {
+            oldBackgroundViewController.willMove(toParentViewController: nil)
+            oldBackgroundViewController.view.removeFromSuperview()
+            oldBackgroundViewController.removeFromParentViewController()
+        }
+
+        // add new background view controller
+        if let backgroundViewController = backgroundViewController {
+            addChildViewController(backgroundViewController)
+            backgroundViewController.view.frame = menuContainerView.bounds
+            backgroundViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            backgroundViewController.view.translatesAutoresizingMaskIntoConstraints = true
+            backgroundContainerView.addSubview(backgroundViewController.view)
+            backgroundViewController.didMove(toParentViewController: self)
+        }
     }
 
     private func configureMenuViewController(oldMenuViewController: UIViewController? = nil) {
@@ -153,6 +195,12 @@ public class AnyMenuViewController: UIViewController {
         contentViewController.view.translatesAutoresizingMaskIntoConstraints = true
         contentContainerView.addSubview(contentViewController.view)
         menuViewController.didMove(toParentViewController: self)
+    }
+
+    private func configureMenuViewFrame() {
+        let openMenuContentFrame = view.bounds.applying(animator.finalContentViewTransform)
+        menuViewController.view.frame.size.width = menuContainerView.frame.size.width - (menuContainerView.frame.size.width - openMenuContentFrame.origin.x)
+        // TODO: make sure the menu size calculation also works for top, bottom and right sided menu
     }
 
     @objc
