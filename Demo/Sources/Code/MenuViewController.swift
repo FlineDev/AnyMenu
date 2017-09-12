@@ -14,6 +14,9 @@ class MenuViewController: UITableViewController {
         return .default
     }
 
+    // MARK: - Stored Instance Properties
+    private var currentIndex: Int = 0
+
     // MARK: - View Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +38,7 @@ class MenuViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "basicCell")!
         cell.backgroundColor = .clear
+        cell.accessoryType = currentIndex == indexPath.row ? .checkmark : .none
 
         switch indexPath.row {
         case 0:
@@ -57,6 +61,7 @@ class MenuViewController: UITableViewController {
     // MARK: - UITableVIewDelegate Protocol Implementation
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        currentIndex = indexPath.row
 
         switch indexPath.row {
         case 0:
@@ -73,5 +78,7 @@ class MenuViewController: UITableViewController {
         default:
             fatalError()
         }
+
+        tableView.reloadData()
     }
 }
