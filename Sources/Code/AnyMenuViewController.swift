@@ -178,6 +178,8 @@ public class AnyMenuViewController: UIViewController {
         menuViewController.view.translatesAutoresizingMaskIntoConstraints = true
         menuContainerView.addSubview(menuViewController.view)
         menuViewController.didMove(toParentViewController: self)
+
+        backgroundContainerView.backgroundColor = menuViewController.view.backgroundColor
     }
 
     private func configureContentViewController(oldContentViewController: UIViewController? = nil) {
