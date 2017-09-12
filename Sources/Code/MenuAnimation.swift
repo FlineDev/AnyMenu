@@ -18,20 +18,24 @@ public struct MenuAnimation {
         case rotate(z: CGFloat)
     }
 
-    /// The duration of the transition animation.
+    /// The duration of the animation
     public let duration: TimeInterval
 
-    /// The collection of animations to apply while transitioning.
-    public let actions: [Action]
+    /// The collection of animations to apply on menu view while transitioning.
+    public let menuViewActions: [Action]
+
+    /// The collection of animations to apply on content view while transitioning.
+    public let contentViewActions: [Action]
 
     /// The timing parameters of the animation.
     public let timingParameters: UITimingCurveProvider
 
     // MARK: - Initializers
     /// Creates a new `MenuAnimation` instannce.
-    public init(duration: TimeInterval, actions: [Action], timingParameters: UITimingCurveProvider) {
+    public init(duration: TimeInterval, menuViewActions: [Action], contentViewActions: [Action], timingParameters: UITimingCurveProvider) {
         self.duration = duration
-        self.actions = actions
+        self.menuViewActions = menuViewActions
+        self.contentViewActions = contentViewActions
         self.timingParameters = timingParameters
     }
 }
@@ -40,12 +44,12 @@ public struct MenuAnimation {
 extension MenuAnimation {
     /// Empy animation
     public static let none = MenuAnimation(
-        duration: 0, actions: [], timingParameters: UICubicTimingParameters(animationCurve: .linear)
+        duration: 0, menuViewActions: [], contentViewActions: [], timingParameters: UICubicTimingParameters(animationCurve: .linear)
     )
 
     /// Default animation
     public static let `default` = MenuAnimation(
-        duration: 0.3, actions: [.translate(x: 300, y: 0)], timingParameters: UICubicTimingParameters(animationCurve: .easeOut)
+        duration: 0.3, menuViewActions: [], contentViewActions: [.translate(x: 300, y: 0)], timingParameters: UICubicTimingParameters(animationCurve: .easeOut)
     )
 //
 //    public static let enbw = MenuAnimation(duration: 0.3, actions: [.translate(x: 320, y: 0), .scale(x: 0.9, y: 0.9)], timingParameters: UICubicTimingParameters(animationCurve: .easeOut))
