@@ -51,6 +51,4 @@ extension MenuAnimation {
     public static let `default` = MenuAnimation(
         duration: 0.3, menuViewActions: [], contentViewActions: [.translate(x: 300, y: 0)], timingParameters: UICubicTimingParameters(animationCurve: .easeOut)
     )
-//
-//    public static let enbw = MenuAnimation(duration: 0.3, actions: [.translate(x: 320, y: 0), .scale(x: 0.9, y: 0.9)], timingParameters: UICubicTimingParameters(animationCurve: .easeOut))
 }
