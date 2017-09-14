@@ -58,13 +58,23 @@ public class AnyMenuViewController: UIViewController {
         }
     }
 
+    private var forceContentViewForStatusBarStyle: Bool = false {
+        didSet {
+            setNeedsStatusBarAppearanceUpdate()
+        }
+    }
+
     /// Returns a childViewController for the status bar style.
     public override var childViewControllerForStatusBarStyle: UIViewController? {
+        guard !forceContentViewForStatusBarStyle else { return contentViewController }
+
         return menuState == .closed ? contentViewController : menuViewController
     }
 
     /// Returns a childViewController for status bar visibility.
     public override var childViewControllerForStatusBarHidden: UIViewController? {
+        guard !forceContentViewForStatusBarStyle else { return contentViewController }
+
         return menuState == .closed ? contentViewController : menuViewController
     }
 
@@ -76,6 +86,7 @@ public class AnyMenuViewController: UIViewController {
     public internal(set) var menuState: MenuState = .closed {
         didSet {
             setNeedsStatusBarAppearanceUpdate()
+            contentContainerView.subviews.forEach { $0.isUserInteractionEnabled = menuState == .closed }
         }
     }
 
@@ -128,6 +139,7 @@ public class AnyMenuViewController: UIViewController {
             menuContainerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             menuContainerView.translatesAutoresizingMaskIntoConstraints = true
             menuContainerView.backgroundColor = .clear
+            menuContainerView.clipsToBounds = true
 
             view.addSubview(menuContainerView)
         }
@@ -137,6 +149,7 @@ public class AnyMenuViewController: UIViewController {
             contentContainerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             contentContainerView.translatesAutoresizingMaskIntoConstraints = true
             contentContainerView.backgroundColor = .clear
+            contentContainerView.clipsToBounds = true
 
             view.addSubview(contentContainerView)
         }
@@ -190,6 +203,9 @@ public class AnyMenuViewController: UIViewController {
             oldContentViewController.removeFromParentViewController()
         }
 
+        // Fixes wrong content view controller status bar layout inset
+        forceContentViewForStatusBarStyle = true
+
         // add new content view controller
         addChildViewController(contentViewController)
         contentViewController.view.frame = contentContainerView.bounds
@@ -197,6 +213,8 @@ public class AnyMenuViewController: UIViewController {
         contentViewController.view.translatesAutoresizingMaskIntoConstraints = true
         contentContainerView.addSubview(contentViewController.view)
         menuViewController.didMove(toParentViewController: self)
+
+        forceContentViewForStatusBarStyle = false
     }
 
     private func configureMenuViewFrame() {
