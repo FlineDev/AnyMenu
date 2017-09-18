@@ -236,13 +236,17 @@ public class AnyMenuViewController: UIViewController {
     /// Opens the menu.
     public func openMenu() {
         menuState = .open
-        animator.startAnimation(for: .open)
+        animator.startAnimation(for: .open) { [unowned self] _ in
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
     }
 
     /// Closes the menu.
     public func closeMenu() {
         menuState = .closed
-        animator.startAnimation(for: .closed)
+        animator.startAnimation(for: .closed) { [unowned self] _ in
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
     }
 
     /// Present menu view controller in a UIWindow.
