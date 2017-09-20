@@ -313,6 +313,10 @@ extension AnyMenuViewAnimator: UIGestureRecognizerDelegate {
     }
 
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return gestureRecognizer === panGestureRecognizer && !(otherGestureRecognizer.view?.viewsInHierarchy(ofType: UIScrollView.self).isEmpty ?? true)
+        var shouldRecognizeSimultaneously = gestureRecognizer === screenEdgePanGestureRecognizer
+        shouldRecognizeSimultaneously = shouldRecognizeSimultaneously ||
+            (gestureRecognizer === panGestureRecognizer && !(otherGestureRecognizer.view?.viewsInHierarchy(ofType: UIScrollView.self).isEmpty ?? true))
+
+        return shouldRecognizeSimultaneously
     }
 }
