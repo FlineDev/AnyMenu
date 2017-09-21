@@ -245,14 +245,14 @@ internal class AnyMenuViewAnimator: NSObject {
         configureGestureRecognizers()
     }
 
-    func startAnimation(for menuState: AnyMenuViewController.MenuState) {
+    func startAnimation(for menuState: AnyMenuViewController.MenuState, completion: ((Bool) -> Void)? = nil) {
         let targetMenuViewTransform = menuState == .open ? finalMenuViewTransform! : initialMenuViewTransform!
         let targetContentViewTransform = menuState == .open ? finalContentViewTransform! : initialContentViewTransform!
 
         UIView.animate(withDuration: animation.duration, delay: 0, options: .layoutSubviews, animations: {
             self.viewController.menuContainerView.transform = targetMenuViewTransform
             self.viewController.contentContainerView.transform = targetContentViewTransform
-        }, completion: nil)
+        }, completion: completion)
     }
 }
 
@@ -313,6 +313,10 @@ extension AnyMenuViewAnimator: UIGestureRecognizerDelegate {
     }
 
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return gestureRecognizer === panGestureRecognizer && !(otherGestureRecognizer.view?.viewsInHierarchy(ofType: UIScrollView.self).isEmpty ?? true)
+        var shouldRecognizeSimultaneously = gestureRecognizer === screenEdgePanGestureRecognizer
+        shouldRecognizeSimultaneously = shouldRecognizeSimultaneously ||
+            (gestureRecognizer === panGestureRecognizer && !(otherGestureRecognizer.view?.viewsInHierarchy(ofType: UIScrollView.self).isEmpty ?? true))
+
+        return shouldRecognizeSimultaneously
     }
 }
