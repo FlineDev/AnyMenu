@@ -176,6 +176,7 @@ internal class AnyMenuViewAnimator: NSObject {
 
         let targetMenuViewTransform = willCollapse ? initialMenuViewTransform! : finalMenuViewTransform!
         let targetContentViewTransform = willCollapse ? initialContentViewTransform! : finalContentViewTransform!
+        let targetShadowViewTransform = viewController.menuOverlaysContent ? targetMenuViewTransform : targetContentViewTransform
         let targetMenuState: AnyMenuViewController.MenuState = willCollapse ? .closed : .open
 
         if animated {
@@ -184,12 +185,14 @@ internal class AnyMenuViewAnimator: NSObject {
             UIView.animate(withDuration: duration, delay: 0, options: .layoutSubviews, animations: {
                 self.viewController.menuContainerView.transform = targetMenuViewTransform
                 self.viewController.contentContainerView.transform = targetContentViewTransform
+                self.viewController.shadowView.transform = targetShadowViewTransform
             }, completion: { _ in
                 self.viewController.menuState = targetMenuState
             })
         } else {
             self.viewController.menuContainerView.transform = targetMenuViewTransform
             self.viewController.contentContainerView.transform = targetContentViewTransform
+            self.viewController.shadowView.transform = targetShadowViewTransform
             self.viewController.menuState = targetMenuState
         }
     }
@@ -248,10 +251,12 @@ internal class AnyMenuViewAnimator: NSObject {
     func startAnimation(for menuState: AnyMenuViewController.MenuState, completion: ((Bool) -> Void)? = nil) {
         let targetMenuViewTransform = menuState == .open ? finalMenuViewTransform! : initialMenuViewTransform!
         let targetContentViewTransform = menuState == .open ? finalContentViewTransform! : initialContentViewTransform!
+        let targetShadowViewTransform = viewController.menuOverlaysContent ? targetMenuViewTransform : targetContentViewTransform
 
         UIView.animate(withDuration: animation.duration, delay: 0, options: .layoutSubviews, animations: {
             self.viewController.menuContainerView.transform = targetMenuViewTransform
             self.viewController.contentContainerView.transform = targetContentViewTransform
+            self.viewController.shadowView.transform = targetShadowViewTransform
         }, completion: completion)
     }
 }
@@ -264,12 +269,13 @@ extension AnyMenuViewAnimator {
         case .changed:
             let translation = gestureRecognizer.translation(in: viewController.view)
             let progress = calculateAnimationProgress(forTranslation: translation, menuState: viewController.menuState)
-            self.viewController.menuContainerView.transform = interpolateTransform(
-                from: initialMenuViewTransform, to: finalMenuViewTransform, progress: progress
-            )
-            self.viewController.contentContainerView.transform = interpolateTransform(
-                from: initialContentViewTransform, to: finalContentViewTransform, progress: progress
-            )
+            let currentMenuViewTransform = interpolateTransform(from: initialMenuViewTransform, to: finalMenuViewTransform, progress: progress)
+            let currentContentViewTransform = interpolateTransform(from: initialContentViewTransform, to: finalContentViewTransform, progress: progress)
+            let currentShadowViewTransform = viewController.menuOverlaysContent ? currentMenuViewTransform : currentContentViewTransform
+
+            self.viewController.menuContainerView.transform = currentMenuViewTransform
+            self.viewController.contentContainerView.transform = currentContentViewTransform
+            self.viewController.shadowView.transform = currentShadowViewTransform
 
         case .ended, .cancelled:
             let velocity = gestureRecognizer.velocity(in: viewController.view)

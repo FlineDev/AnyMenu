@@ -24,6 +24,7 @@ public class AnyMenuViewController: UIViewController {
     internal var backgroundContainerView: UIView!
     internal var menuContainerView: UIView!
     internal var contentContainerView: UIView!
+    internal var shadowView: UIView!
 
     /// The background view controller which is the background of the menu.
     public var backgroundViewController: UIViewController? {
@@ -58,6 +59,42 @@ public class AnyMenuViewController: UIViewController {
         }
     }
 
+    /// The opacity of the menu's shadow. Default `0.3`
+    public var menuShadowOpacity: CGFloat = 0.3 {
+        didSet {
+            if isViewLoaded {
+                shadowView.layer.shadowOpacity = Float(menuShadowOpacity)
+            }
+        }
+    }
+
+    /// The blur radius (in points) used to render the menu's shadow. Default `8`
+    public var menuShadowRadius: CGFloat = 8 {
+        didSet {
+            if isViewLoaded {
+                shadowView.layer.shadowRadius = menuShadowRadius
+            }
+        }
+    }
+
+    /// The offset (in points) of the menu's shadow. Default `CGSize.zero`
+    public var menuShadowOffset: CGSize = .zero {
+        didSet {
+            if isViewLoaded {
+                shadowView.layer.shadowOffset = menuShadowOffset
+            }
+        }
+    }
+
+    /// The color of the menu's shadow. Default `UIColor.black`
+    public var menuShadowColor: UIColor? = .black {
+        didSet {
+            if isViewLoaded {
+                shadowView.layer.shadowColor = menuShadowColor?.cgColor
+            }
+        }
+    }
+
     private var forceContentViewForStatusBarStyle: Bool = false {
         didSet {
             setNeedsStatusBarAppearanceUpdate()
@@ -78,7 +115,7 @@ public class AnyMenuViewController: UIViewController {
         return menuState == .closed ? contentViewController : menuViewController
     }
 
-    private let menuOverlaysContent: Bool
+    internal let menuOverlaysContent: Bool
 
     private var animator: AnyMenuViewAnimator!
 
@@ -154,6 +191,26 @@ public class AnyMenuViewController: UIViewController {
             view.addSubview(contentContainerView)
         }
 
+        if shadowView == nil {
+            shadowView = UIView(frame: view.bounds)
+            shadowView.backgroundColor = .clear
+            shadowView.clipsToBounds = false
+            shadowView.isOpaque = false
+            shadowView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            shadowView.translatesAutoresizingMaskIntoConstraints = true
+
+            shadowView.layer.shadowOpacity = Float(menuShadowOpacity)
+            shadowView.layer.shadowRadius = menuShadowRadius
+            shadowView.layer.shadowOffset = menuShadowOffset
+            shadowView.layer.shadowColor = menuShadowColor?.cgColor
+            shadowView.layer.shadowPath = CGPath(rect: view.bounds, transform: nil)
+            shadowView.layer.masksToBounds = false
+
+            view.addSubview(shadowView)
+        }
+
+        view.bringSubview(toFront: menuOverlaysContent ? contentContainerView : menuContainerView)
+        view.bringSubview(toFront: shadowView)
         view.bringSubview(toFront: menuOverlaysContent ? menuContainerView : contentContainerView)
     }
 
