@@ -26,6 +26,8 @@ internal class AnyMenuViewAnimator: NSObject {
     fileprivate var screenEdgePanGestureRecognizer: UIScreenEdgePanGestureRecognizer?
     fileprivate var tapGestureRecognizer: UITapGestureRecognizer?
 
+    internal var contentIntersectsStatusBar = true
+
     internal var gestureRecognizers: [UIGestureRecognizer] {
         let gestureRecognizers: [UIGestureRecognizer?] = [
             panGestureRecognizer,
@@ -174,25 +176,18 @@ internal class AnyMenuViewAnimator: NSObject {
             willCollapse = false
         }
 
-        let targetMenuViewTransform = willCollapse ? initialMenuViewTransform! : finalMenuViewTransform!
-        let targetContentViewTransform = willCollapse ? initialContentViewTransform! : finalContentViewTransform!
-        let targetShadowViewTransform = viewController.menuOverlaysContent ? targetMenuViewTransform : targetContentViewTransform
         let targetMenuState: AnyMenuViewController.MenuState = willCollapse ? .closed : .open
 
         if animated {
             duration = willCollapse ? duration * TimeInterval(1 - progress) : duration * TimeInterval(progress)
 
             UIView.animate(withDuration: duration, delay: 0, options: .layoutSubviews, animations: {
-                self.viewController.menuContainerView.transform = targetMenuViewTransform
-                self.viewController.contentContainerView.transform = targetContentViewTransform
-                self.viewController.shadowView.transform = targetShadowViewTransform
+                self.layout(for: targetMenuState == .closed ? 0 : 1)
             }, completion: { _ in
                 self.viewController.menuState = targetMenuState
             })
         } else {
-            self.viewController.menuContainerView.transform = targetMenuViewTransform
-            self.viewController.contentContainerView.transform = targetContentViewTransform
-            self.viewController.shadowView.transform = targetShadowViewTransform
+            self.layout(for: targetMenuState == .closed ? 0 : 1)
             self.viewController.menuState = targetMenuState
         }
     }
@@ -249,15 +244,32 @@ internal class AnyMenuViewAnimator: NSObject {
     }
 
     func startAnimation(for menuState: AnyMenuViewController.MenuState, completion: ((Bool) -> Void)? = nil) {
-        let targetMenuViewTransform = menuState == .open ? finalMenuViewTransform! : initialMenuViewTransform!
-        let targetContentViewTransform = menuState == .open ? finalContentViewTransform! : initialContentViewTransform!
-        let targetShadowViewTransform = viewController.menuOverlaysContent ? targetMenuViewTransform : targetContentViewTransform
-
         UIView.animate(withDuration: animation.duration, delay: 0, options: .layoutSubviews, animations: {
-            self.viewController.menuContainerView.transform = targetMenuViewTransform
-            self.viewController.contentContainerView.transform = targetContentViewTransform
-            self.viewController.shadowView.transform = targetShadowViewTransform
+            self.layout(for: menuState == .closed ? 0 : 1)
         }, completion: completion)
+    }
+
+    func layout(for progress: CGFloat) {
+        let currentMenuViewTransform = interpolateTransform(from: initialMenuViewTransform, to: finalMenuViewTransform, progress: progress)
+        let currentContentViewTransform = interpolateTransform(from: initialContentViewTransform, to: finalContentViewTransform, progress: progress)
+        let currentShadowViewTransform = viewController.menuOverlaysContent ? currentMenuViewTransform : currentContentViewTransform
+
+        viewController.menuContainerView.transform = currentMenuViewTransform
+        viewController.contentContainerView.transform = currentContentViewTransform
+        viewController.shadowView.transform = currentShadowViewTransform
+
+        let intersectionArea = UIApplication.shared.statusBarFrame.intersection(viewController.contentContainerView.frame).area
+        let statusBarArea = UIApplication.shared.statusBarFrame.area
+
+        let contentIntersectsStatusBar = intersectionArea / statusBarArea > 0.5
+        if contentIntersectsStatusBar != self.contentIntersectsStatusBar {
+            self.contentIntersectsStatusBar = contentIntersectsStatusBar
+            UIView.animate(withDuration: MenuAnimation.default.duration) {
+                self.viewController.setNeedsStatusBarAppearanceUpdate()
+            }
+        } else {
+            self.contentIntersectsStatusBar = contentIntersectsStatusBar
+        }
     }
 }
 
@@ -269,13 +281,7 @@ extension AnyMenuViewAnimator {
         case .changed:
             let translation = gestureRecognizer.translation(in: viewController.view)
             let progress = calculateAnimationProgress(forTranslation: translation, menuState: viewController.menuState)
-            let currentMenuViewTransform = interpolateTransform(from: initialMenuViewTransform, to: finalMenuViewTransform, progress: progress)
-            let currentContentViewTransform = interpolateTransform(from: initialContentViewTransform, to: finalContentViewTransform, progress: progress)
-            let currentShadowViewTransform = viewController.menuOverlaysContent ? currentMenuViewTransform : currentContentViewTransform
-
-            self.viewController.menuContainerView.transform = currentMenuViewTransform
-            self.viewController.contentContainerView.transform = currentContentViewTransform
-            self.viewController.shadowView.transform = currentShadowViewTransform
+            layout(for: progress)
 
         case .ended, .cancelled:
             let velocity = gestureRecognizer.velocity(in: viewController.view)
@@ -324,5 +330,11 @@ extension AnyMenuViewAnimator: UIGestureRecognizerDelegate {
             (gestureRecognizer === panGestureRecognizer && !(otherGestureRecognizer.view?.viewsInHierarchy(ofType: UIScrollView.self).isEmpty ?? true))
 
         return shouldRecognizeSimultaneously
+    }
+}
+
+extension CGRect {
+    var area: CGFloat {
+        return width * height
     }
 }
