@@ -95,12 +95,6 @@ public class AnyMenuViewController: UIViewController {
         }
     }
 
-    private var forceContentViewForStatusBarStyle: Bool = false {
-        didSet {
-            setNeedsStatusBarAppearanceUpdate()
-        }
-    }
-
     /// Returns a childViewController for the status bar style.
     public override var childViewControllerForStatusBarStyle: UIViewController? {
         return animator.contentIntersectsStatusBar ? contentViewController : menuViewController
@@ -249,31 +243,43 @@ public class AnyMenuViewController: UIViewController {
     }
 
     private func configureContentViewController(oldContentViewController: UIViewController? = nil) {
-        // remove old menu view controller if any
+        // Add new content view controller
+        addChildViewController(contentViewController)
+
+        // First add view to self's view which isn't transformed. Thereby, the navigation bar is layouted properly.
+        // After this has been done (which isn't visible due to isHidden, real layout can be done.
+        contentViewController.view.isHidden = true
+        view.addSubview(contentViewController.view)
+
+        // Do real layout
+        contentViewController.view.frame = contentContainerView.bounds
+        contentViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        contentViewController.view.translatesAutoresizingMaskIntoConstraints = true
+        contentViewController.view.removeFromSuperview()
+        contentContainerView.addSubview(contentViewController.view)
+        contentViewController.view.isHidden = false
+        menuViewController.didMove(toParentViewController: self)
+
+        // Remove old menu view controller if any
         if let oldContentViewController = oldContentViewController {
             oldContentViewController.willMove(toParentViewController: nil)
             oldContentViewController.view.removeFromSuperview()
             oldContentViewController.removeFromParentViewController()
         }
 
-        // Fixes wrong content view controller status bar layout inset
-        forceContentViewForStatusBarStyle = true
-
-        // add new content view controller
-        addChildViewController(contentViewController)
-        contentViewController.view.frame = contentContainerView.bounds
-        contentViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        contentViewController.view.translatesAutoresizingMaskIntoConstraints = true
-        contentContainerView.addSubview(contentViewController.view)
-        menuViewController.didMove(toParentViewController: self)
-
-        forceContentViewForStatusBarStyle = false
+        // Adjust user interaction enabled status
+        configureContentUserInteraction()
     }
 
     private func configureMenuViewFrame() {
         let openMenuContentFrame = view.bounds.applying(animator.finalContentViewTransform)
         menuViewController.view.frame.size.width = menuContainerView.frame.size.width - (menuContainerView.frame.size.width - openMenuContentFrame.origin.x)
         // TODO: make sure the menu size calculation also works for top, bottom and right sided menu
+    }
+
+    private func configureContentUserInteraction() {
+        // Disable user interaction according to menu state. Disable for subviews since otherwise tap gesture recognizer is also disabled.
+        contentContainerView.subviews.forEach { $0.isUserInteractionEnabled = menuState == .closed }
     }
 
     @objc
