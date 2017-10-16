@@ -112,10 +112,12 @@ public class AnyMenuViewController: UIViewController {
     /// The current menu state.
     public internal(set) var menuState: MenuState = .closed {
         didSet {
-            setNeedsStatusBarAppearanceUpdate()
-
             // Adjust user interaction enabled status
             configureContentUserInteraction()
+            
+            UIView.animate(withDuration: MenuAnimation.default.duration) {
+                self.setNeedsStatusBarAppearanceUpdate()
+            }
         }
     }
 
