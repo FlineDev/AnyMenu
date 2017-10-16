@@ -97,12 +97,12 @@ public class AnyMenuViewController: UIViewController {
 
     /// Returns a childViewController for the status bar style.
     public override var childViewControllerForStatusBarStyle: UIViewController? {
-        return menuState == .closed ? contentViewController : menuViewController
+        return animator.contentIntersectsStatusBar ? contentViewController : menuViewController
     }
 
     /// Returns a childViewController for status bar visibility.
     public override var childViewControllerForStatusBarHidden: UIViewController? {
-        return menuState == .closed ? contentViewController : menuViewController
+        return animator.contentIntersectsStatusBar ? contentViewController : menuViewController
     }
 
     internal let menuOverlaysContent: Bool
@@ -114,10 +114,6 @@ public class AnyMenuViewController: UIViewController {
         didSet {
             // Adjust user interaction enabled status
             configureContentUserInteraction()
-            
-            UIView.animate(withDuration: MenuAnimation.default.duration) {
-                self.setNeedsStatusBarAppearanceUpdate()
-            }
         }
     }
 
@@ -299,17 +295,13 @@ public class AnyMenuViewController: UIViewController {
     /// Opens the menu.
     public func openMenu() {
         menuState = .open
-        animator.startAnimation(for: .open) { [unowned self] _ in
-            self.setNeedsStatusBarAppearanceUpdate()
-        }
+        animator.startAnimation(for: .open)
     }
 
     /// Closes the menu.
     public func closeMenu() {
         menuState = .closed
-        animator.startAnimation(for: .closed) { [unowned self] _ in
-            self.setNeedsStatusBarAppearanceUpdate()
-        }
+        animator.startAnimation(for: .closed)
     }
 
     /// Present menu view controller in a UIWindow.
