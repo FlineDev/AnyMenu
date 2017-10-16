@@ -113,7 +113,9 @@ public class AnyMenuViewController: UIViewController {
     public internal(set) var menuState: MenuState = .closed {
         didSet {
             setNeedsStatusBarAppearanceUpdate()
-            contentContainerView.subviews.forEach { $0.isUserInteractionEnabled = menuState == .closed }
+
+            // Adjust user interaction enabled status
+            configureContentUserInteraction()
         }
     }
 
@@ -266,12 +268,20 @@ public class AnyMenuViewController: UIViewController {
             oldContentViewController.view.removeFromSuperview()
             oldContentViewController.removeFromParentViewController()
         }
+
+        // Adjust user interaction enabled status
+        configureContentUserInteraction()
     }
 
     private func configureMenuViewFrame() {
         let openMenuContentFrame = view.bounds.applying(animator.finalContentViewTransform)
         menuViewController.view.frame.size.width = menuContainerView.frame.size.width - (menuContainerView.frame.size.width - openMenuContentFrame.origin.x)
         // TODO: make sure the menu size calculation also works for top, bottom and right sided menu
+    }
+
+    private func configureContentUserInteraction() {
+        // Disable user interaction according to menu state. Disable for subviews since otherwise tap gesture recognizer is also disabled.
+        contentContainerView.subviews.forEach { $0.isUserInteractionEnabled = menuState == .closed }
     }
 
     @objc
