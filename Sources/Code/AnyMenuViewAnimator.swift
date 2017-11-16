@@ -243,10 +243,14 @@ internal class AnyMenuViewAnimator: NSObject {
         configureGestureRecognizers()
     }
 
-    func startAnimation(for menuState: AnyMenuViewController.MenuState, completion: ((Bool) -> Void)? = nil) {
+    func startAnimation(for menuState: AnyMenuViewController.MenuState, completion: (() -> Void)? = nil) {
+        UIApplication.shared.beginIgnoringInteractionEvents()
         UIView.animate(withDuration: animation.duration, delay: 0, options: .layoutSubviews, animations: {
             self.layout(for: menuState == .closed ? 0 : 1)
-        }, completion: completion)
+        }, completion: { _ in
+            completion?()
+            UIApplication.shared.endIgnoringInteractionEvents()
+        })
     }
 
     func layout(for progress: CGFloat) {
