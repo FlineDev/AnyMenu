@@ -268,7 +268,7 @@ internal class AnyMenuViewAnimator: NSObject {
         let contentIntersectsStatusBar = intersectionArea / statusBarArea > 0.5
         if contentIntersectsStatusBar != self.contentIntersectsStatusBar {
             self.contentIntersectsStatusBar = contentIntersectsStatusBar
-            UIView.animate(withDuration: MenuAnimation.default.duration) {
+            UIView.animate(withDuration: animation.duration) {
                 self.viewController.setNeedsStatusBarAppearanceUpdate()
             }
         } else {
