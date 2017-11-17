@@ -15,6 +15,7 @@ internal class AnyMenuViewAnimator: NSObject {
     fileprivate weak var viewController: AnyMenuViewController!
 
     fileprivate let animation: MenuAnimation
+    fileprivate let shouldUseSwipeGestureRecognizers: Bool
 
     fileprivate var initialMenuViewTransform: CGAffineTransform!
     fileprivate var finalMenuViewTransform: CGAffineTransform!
@@ -39,8 +40,9 @@ internal class AnyMenuViewAnimator: NSObject {
     }
 
     // MARK: - Initializers
-    internal required init(animation: MenuAnimation) {
+    internal required init(animation: MenuAnimation, shouldUseSwipeGestureRecognizers: Bool = true) {
         self.animation = animation
+        self.shouldUseSwipeGestureRecognizers = shouldUseSwipeGestureRecognizers
         super.init()
     }
 
@@ -202,15 +204,17 @@ internal class AnyMenuViewAnimator: NSObject {
         tapGestureRecognizer = nil
 
         if true {
-            panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
-            panGestureRecognizer!.minimumNumberOfTouches = 1
-            panGestureRecognizer!.maximumNumberOfTouches = 1
+            if shouldUseSwipeGestureRecognizers {
+                panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+                panGestureRecognizer!.minimumNumberOfTouches = 1
+                panGestureRecognizer!.maximumNumberOfTouches = 1
 
-            screenEdgePanGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
-            screenEdgePanGestureRecognizer!.minimumNumberOfTouches = 1
-            screenEdgePanGestureRecognizer!.maximumNumberOfTouches = 1
-            screenEdgePanGestureRecognizer!.edges = calculateScreenEdgePanGestureRectEdges(for: animation.contentViewActions)
-            screenEdgePanGestureRecognizer!.require(toFail: panGestureRecognizer!)
+                screenEdgePanGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+                screenEdgePanGestureRecognizer!.minimumNumberOfTouches = 1
+                screenEdgePanGestureRecognizer!.maximumNumberOfTouches = 1
+                screenEdgePanGestureRecognizer!.edges = calculateScreenEdgePanGestureRectEdges(for: animation.contentViewActions)
+                screenEdgePanGestureRecognizer!.require(toFail: panGestureRecognizer!)
+            }
 
             tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
             tapGestureRecognizer!.numberOfTapsRequired = 1
@@ -243,10 +247,14 @@ internal class AnyMenuViewAnimator: NSObject {
         configureGestureRecognizers()
     }
 
-    func startAnimation(for menuState: AnyMenuViewController.MenuState, completion: ((Bool) -> Void)? = nil) {
+    func startAnimation(for menuState: AnyMenuViewController.MenuState, completion: (() -> Void)? = nil) {
+        UIApplication.shared.beginIgnoringInteractionEvents()
         UIView.animate(withDuration: animation.duration, delay: 0, options: .layoutSubviews, animations: {
             self.layout(for: menuState == .closed ? 0 : 1)
-        }, completion: completion)
+        }, completion: { _ in
+            completion?()
+            UIApplication.shared.endIgnoringInteractionEvents()
+        })
     }
 
     func layout(for progress: CGFloat) {
@@ -264,7 +272,7 @@ internal class AnyMenuViewAnimator: NSObject {
         let contentIntersectsStatusBar = intersectionArea / statusBarArea > 0.5
         if contentIntersectsStatusBar != self.contentIntersectsStatusBar {
             self.contentIntersectsStatusBar = contentIntersectsStatusBar
-            UIView.animate(withDuration: MenuAnimation.default.duration) {
+            UIView.animate(withDuration: animation.duration) {
                 self.viewController.setNeedsStatusBarAppearanceUpdate()
             }
         } else {

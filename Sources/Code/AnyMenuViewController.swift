@@ -124,12 +124,12 @@ public class AnyMenuViewController: UIViewController {
     ///   - menuViewController: The menu view controller which contains the menu.
     ///   - contentViewController: The initial content view controller to be shown.
     public required init(menuViewController: UIViewController, contentViewController: UIViewController,
-                         menuOverlaysContent: Bool, animation: MenuAnimation = .default) {
+                         menuOverlaysContent: Bool, animation: MenuAnimation = .default, shouldUseSwipeGestureRecognizers: Bool = true) {
         self.menuViewController = menuViewController
         self.contentViewController = contentViewController
         self.menuOverlaysContent = menuOverlaysContent
         super.init(nibName: nil, bundle: nil)
-        self.animator = AnyMenuViewAnimator(animation: animation)
+        self.animator = AnyMenuViewAnimator(animation: animation, shouldUseSwipeGestureRecognizers: shouldUseSwipeGestureRecognizers)
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -293,15 +293,15 @@ public class AnyMenuViewController: UIViewController {
     }
 
     /// Opens the menu.
-    public func openMenu() {
+    public func openMenu(completion: (() -> Void)? = nil) {
         menuState = .open
-        animator.startAnimation(for: .open)
+        animator.startAnimation(for: .open, completion: completion)
     }
 
     /// Closes the menu.
-    public func closeMenu() {
+    public func closeMenu(completion: (() -> Void)? = nil) {
         menuState = .closed
-        animator.startAnimation(for: .closed)
+        animator.startAnimation(for: .closed, completion: completion)
     }
 
     /// Present menu view controller in a UIWindow.
