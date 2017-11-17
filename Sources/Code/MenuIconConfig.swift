@@ -20,7 +20,7 @@ public struct MenuIconConfig {
 
         /// Initializes a line config.
         ///
-        /// - Paramters:
+        /// - Parameters:
         ///   - count: The number of lines to be rendered.
         ///   - height: The height of a single lines stroke.
         ///   - verticalGap: The vertical gap between the lines.
@@ -40,7 +40,7 @@ public struct MenuIconConfig {
     // MARK: - Initializers
     /// Initializes a Menu icon config.
     ///
-    /// - Paramters:
+    /// - Parameters:
     ///   - width: The width of the resuliting icon image.
     ///   - color: The color of the Menu button.
     ///   - lineConfig: The configuration for the lines.
