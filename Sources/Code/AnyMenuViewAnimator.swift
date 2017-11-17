@@ -15,6 +15,7 @@ internal class AnyMenuViewAnimator: NSObject {
     fileprivate weak var viewController: AnyMenuViewController!
 
     fileprivate let animation: MenuAnimation
+    fileprivate let shouldUseSwipeGestureRecognizers: Bool
 
     fileprivate var initialMenuViewTransform: CGAffineTransform!
     fileprivate var finalMenuViewTransform: CGAffineTransform!
@@ -39,8 +40,9 @@ internal class AnyMenuViewAnimator: NSObject {
     }
 
     // MARK: - Initializers
-    internal required init(animation: MenuAnimation) {
+    internal required init(animation: MenuAnimation, shouldUseSwipeGestureRecognizers: Bool = true) {
         self.animation = animation
+        self.shouldUseSwipeGestureRecognizers = shouldUseSwipeGestureRecognizers
         super.init()
     }
 
@@ -202,15 +204,17 @@ internal class AnyMenuViewAnimator: NSObject {
         tapGestureRecognizer = nil
 
         if true {
-            panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
-            panGestureRecognizer!.minimumNumberOfTouches = 1
-            panGestureRecognizer!.maximumNumberOfTouches = 1
+            if shouldUseSwipeGestureRecognizers {
+                panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+                panGestureRecognizer!.minimumNumberOfTouches = 1
+                panGestureRecognizer!.maximumNumberOfTouches = 1
 
-            screenEdgePanGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
-            screenEdgePanGestureRecognizer!.minimumNumberOfTouches = 1
-            screenEdgePanGestureRecognizer!.maximumNumberOfTouches = 1
-            screenEdgePanGestureRecognizer!.edges = calculateScreenEdgePanGestureRectEdges(for: animation.contentViewActions)
-            screenEdgePanGestureRecognizer!.require(toFail: panGestureRecognizer!)
+                screenEdgePanGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+                screenEdgePanGestureRecognizer!.minimumNumberOfTouches = 1
+                screenEdgePanGestureRecognizer!.maximumNumberOfTouches = 1
+                screenEdgePanGestureRecognizer!.edges = calculateScreenEdgePanGestureRectEdges(for: animation.contentViewActions)
+                screenEdgePanGestureRecognizer!.require(toFail: panGestureRecognizer!)
+            }
 
             tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
             tapGestureRecognizer!.numberOfTapsRequired = 1

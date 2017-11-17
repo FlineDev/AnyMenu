@@ -124,12 +124,12 @@ public class AnyMenuViewController: UIViewController {
     ///   - menuViewController: The menu view controller which contains the menu.
     ///   - contentViewController: The initial content view controller to be shown.
     public required init(menuViewController: UIViewController, contentViewController: UIViewController,
-                         menuOverlaysContent: Bool, animation: MenuAnimation = .default) {
+                         menuOverlaysContent: Bool, animation: MenuAnimation = .default, shouldUseSwipeGestureRecognizers: Bool = true) {
         self.menuViewController = menuViewController
         self.contentViewController = contentViewController
         self.menuOverlaysContent = menuOverlaysContent
         super.init(nibName: nil, bundle: nil)
-        self.animator = AnyMenuViewAnimator(animation: animation)
+        self.animator = AnyMenuViewAnimator(animation: animation, shouldUseSwipeGestureRecognizers: shouldUseSwipeGestureRecognizers)
     }
 
     required public init?(coder aDecoder: NSCoder) {
