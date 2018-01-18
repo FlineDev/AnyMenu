@@ -182,13 +182,13 @@ internal class AnyMenuViewAnimator: NSObject {
             duration = willCollapse ? duration * TimeInterval(1 - progress) : duration * TimeInterval(progress)
 
             UIView.animate(withDuration: duration, delay: 0, options: .layoutSubviews, animations: {
-                self.layout(for: targetMenuState == .closed ? 0 : 1)
+                self.layout(progress: targetMenuState == .closed ? 0 : 1)
             }, completion: { _ in
                 self.viewController.menuState = targetMenuState
             })
         } else {
-            self.layout(for: targetMenuState == .closed ? 0 : 1)
-            self.viewController.menuState = targetMenuState
+            layout(progress: targetMenuState == .closed ? 0 : 1)
+            viewController.menuState = targetMenuState
         }
     }
 
@@ -245,11 +245,11 @@ internal class AnyMenuViewAnimator: NSObject {
 
     func startAnimation(for menuState: AnyMenuViewController.MenuState, completion: ((Bool) -> Void)? = nil) {
         UIView.animate(withDuration: animation.duration, delay: 0, options: .layoutSubviews, animations: {
-            self.layout(for: menuState == .closed ? 0 : 1)
+            self.layout(progress: menuState == .closed ? 0 : 1)
         }, completion: completion)
     }
 
-    func layout(for progress: CGFloat) {
+    func layout(progress: CGFloat) {
         let currentMenuViewTransform = interpolateTransform(from: initialMenuViewTransform, to: finalMenuViewTransform, progress: progress)
         let currentContentViewTransform = interpolateTransform(from: initialContentViewTransform, to: finalContentViewTransform, progress: progress)
         let currentShadowViewTransform = viewController.menuOverlaysContent ? currentMenuViewTransform : currentContentViewTransform
@@ -270,6 +270,19 @@ internal class AnyMenuViewAnimator: NSObject {
         } else {
             self.contentIntersectsStatusBar = contentIntersectsStatusBar
         }
+
+        if #available(iOS 11.0, *) {
+            updateSafeAreaInsets(progress: progress)
+        }
+    }
+
+    @available(iOS 11.0, *)
+    private func updateSafeAreaInsets(progress: CGFloat) {
+        if !viewController.menuOverlaysContent {
+            let contentViewIntersection = UIApplication.shared.statusBarFrame.intersection(viewController.contentContainerView.frame)
+            let contentViewSafeAreaInsetTop = UIApplication.shared.statusBarFrame.height - contentViewIntersection.height
+            viewController.contentViewController.additionalSafeAreaInsets.top = contentViewSafeAreaInsetTop
+        }
     }
 }
 
@@ -281,7 +294,7 @@ extension AnyMenuViewAnimator {
         case .changed:
             let translation = gestureRecognizer.translation(in: viewController.view)
             let progress = calculateAnimationProgress(forTranslation: translation, menuState: viewController.menuState)
-            layout(for: progress)
+            layout(progress: progress)
 
         case .ended, .cancelled:
             let velocity = gestureRecognizer.velocity(in: viewController.view)
