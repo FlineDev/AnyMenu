@@ -95,6 +95,13 @@ public class AnyMenuViewController: UIViewController {
         }
     }
 
+    /// Determines whether or not the swipe gesture reocgnizers are enabled. Defaults to true.
+    public var shouldAllowSwipeGestures: Bool = true {
+        didSet {
+            animator.setSwipeGestures(enabled: shouldAllowSwipeGestures)
+        }
+    }
+
     /// Returns a childViewController for the status bar style.
     public override var childViewControllerForStatusBarStyle: UIViewController? {
         return animator.contentIntersectsStatusBar ? contentViewController : menuViewController

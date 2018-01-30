@@ -243,6 +243,11 @@ internal class AnyMenuViewAnimator: NSObject {
         configureGestureRecognizers()
     }
 
+    func setSwipeGestures(enabled flag: Bool) {
+        panGestureRecognizer?.isEnabled = flag
+        screenEdgePanGestureRecognizer?.isEnabled = flag
+    }
+
     func startAnimation(for menuState: AnyMenuViewController.MenuState, completion: ((Bool) -> Void)? = nil) {
         UIView.animate(withDuration: animation.duration, delay: 0, options: .layoutSubviews, animations: {
             self.layout(for: menuState == .closed ? 0 : 1)
