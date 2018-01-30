@@ -293,15 +293,15 @@ public class AnyMenuViewController: UIViewController {
     }
 
     /// Opens the menu.
-    public func openMenu() {
+    public func openMenu(completion: ((Bool) -> Void)? = nil) {
         menuState = .open
-        animator.startAnimation(for: .open)
+        animator.startAnimation(for: .open, completion: completion)
     }
 
     /// Closes the menu.
-    public func closeMenu() {
+    public func closeMenu(completion: ((Bool) -> Void)? = nil) {
         menuState = .closed
-        animator.startAnimation(for: .closed)
+        animator.startAnimation(for: .closed, completion: completion)
     }
 
     /// Present menu view controller in a UIWindow.
