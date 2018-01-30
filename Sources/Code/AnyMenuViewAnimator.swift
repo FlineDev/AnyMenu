@@ -230,6 +230,8 @@ internal class AnyMenuViewAnimator: NSObject {
             gestureRecognizer.delegate = self
             self.viewController.contentContainerView.addGestureRecognizer(gestureRecognizer)
         }
+
+        setSwipeGestures(enabled: viewController.shouldAllowSwipeGestures)
     }
 
     func configure(forViewController viewController: AnyMenuViewController) {
