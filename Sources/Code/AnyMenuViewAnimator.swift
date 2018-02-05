@@ -230,6 +230,8 @@ internal class AnyMenuViewAnimator: NSObject {
             gestureRecognizer.delegate = self
             self.viewController.contentContainerView.addGestureRecognizer(gestureRecognizer)
         }
+
+        setSwipeGestures(enabled: viewController.shouldAllowSwipeGestures)
     }
 
     func configure(forViewController viewController: AnyMenuViewController) {
@@ -241,6 +243,11 @@ internal class AnyMenuViewAnimator: NSObject {
         finalContentViewTransform = makeAffineTranform(for: animation.contentViewActions)
 
         configureGestureRecognizers()
+    }
+
+    func setSwipeGestures(enabled flag: Bool) {
+        panGestureRecognizer?.isEnabled = flag
+        screenEdgePanGestureRecognizer?.isEnabled = flag
     }
 
     func startAnimation(for menuState: AnyMenuViewController.MenuState, completion: ((Bool) -> Void)? = nil) {
