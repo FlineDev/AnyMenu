@@ -274,6 +274,14 @@ public class AnyMenuViewController: UIViewController {
             oldContentViewController.removeFromParentViewController()
         }
 
+        if #available(iOS 11.0, *) {
+            if !menuOverlaysContent {
+                let contentViewIntersection = UIApplication.shared.statusBarFrame.intersection(contentContainerView.frame)
+                let contentViewSafeAreaInsetTop = UIApplication.shared.statusBarFrame.height - contentViewIntersection.height
+                contentViewController.additionalSafeAreaInsets.top = contentViewSafeAreaInsetTop
+            }
+        }
+
         // Adjust user interaction enabled status
         configureContentUserInteraction()
     }
