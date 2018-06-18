@@ -8,6 +8,12 @@
 
 import UIKit
 
+/// Any Menu Delegation
+public protocol AnyMenuViewControllerDelegate: class {
+    /// Notifies the delegate after transition to a new state
+    func anyMenuViewController(_ anyMenuViewController: AnyMenuViewController, didChange menuState: AnyMenuViewController.MenuState)
+}
+
 /// The container view controller coordinating the menu opening/close animations.
 public class AnyMenuViewController: UIViewController {
     // MARK: - Sub Types
@@ -116,11 +122,15 @@ public class AnyMenuViewController: UIViewController {
 
     private var animator: AnyMenuViewAnimator!
 
+    /// AnyMenuViewController Delegate
+    public weak var delegate: AnyMenuViewControllerDelegate?
+
     /// The current menu state.
     public internal(set) var menuState: MenuState = .closed {
         didSet {
             // Adjust user interaction enabled status
             configureContentUserInteraction()
+            delegate?.anyMenuViewController(self, didChange: menuState)
         }
     }
 
@@ -309,14 +319,24 @@ public class AnyMenuViewController: UIViewController {
 
     /// Opens the menu.
     public func openMenu(completion: ((Bool) -> Void)? = nil) {
-        menuState = .open
-        animator.startAnimation(for: .open, completion: completion)
+        animator.startAnimation(for: .open) { [unowned self] success in
+            if success {
+                self.menuState = .open
+            }
+
+            completion?(success)
+        }
     }
 
     /// Closes the menu.
     public func closeMenu(completion: ((Bool) -> Void)? = nil) {
-        menuState = .closed
-        animator.startAnimation(for: .closed, completion: completion)
+        animator.startAnimation(for: .closed) { [unowned self] success in
+            if success {
+                self.menuState = .closed
+            }
+
+            completion?(success)
+        }
     }
 
     /// Present menu view controller in a UIWindow.
