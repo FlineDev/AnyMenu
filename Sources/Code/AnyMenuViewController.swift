@@ -130,7 +130,9 @@ public class AnyMenuViewController: UIViewController {
         didSet {
             // Adjust user interaction enabled status
             configureContentUserInteraction()
-            delegate?.anyMenuViewController(self, didChange: menuState)
+            if oldValue != menuState {
+                delegate?.anyMenuViewController(self, didChange: menuState)
+            }
         }
     }
 
