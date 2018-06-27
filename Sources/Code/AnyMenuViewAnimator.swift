@@ -16,6 +16,8 @@ internal class AnyMenuViewAnimator: NSObject {
 
     fileprivate let animation: MenuAnimation
 
+    private(set) internal var isAnimating: Bool = false
+
     fileprivate var initialMenuViewTransform: CGAffineTransform!
     fileprivate var finalMenuViewTransform: CGAffineTransform!
 
@@ -251,9 +253,15 @@ internal class AnyMenuViewAnimator: NSObject {
     }
 
     func startAnimation(for menuState: AnyMenuViewController.MenuState, completion: ((Bool) -> Void)? = nil) {
-        UIView.animate(withDuration: animation.duration, delay: 0, options: .layoutSubviews, animations: {
+        let animations: () -> Void = { [unowned self] in
             self.layout(progress: menuState == .closed ? 0 : 1)
-        }, completion: completion)
+        }
+
+        isAnimating = true
+        UIView.animate(withDuration: animation.duration, delay: 0, options: .layoutSubviews, animations: animations) { [unowned self] result in
+            self.isAnimating = false
+            completion?(result)
+        }
     }
 
     func layout(progress: CGFloat) {

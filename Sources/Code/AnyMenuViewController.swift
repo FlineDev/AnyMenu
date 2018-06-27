@@ -21,9 +21,9 @@ public class AnyMenuViewController: UIViewController {
     static weak var shared: AnyMenuViewController?
 
     // MARK: - Stored Instance Properties
-    internal var backgroundContainerView: UIView!
-    internal var menuContainerView: UIView!
-    internal var contentContainerView: UIView!
+    internal var backgroundContainerView: AnyMenuContainerView!
+    internal var menuContainerView: AnyMenuContainerView!
+    internal var contentContainerView: AnyMenuContainerView!
     internal var shadowView: UIView!
 
     /// The background view controller which is the background of the menu.
@@ -160,7 +160,8 @@ public class AnyMenuViewController: UIViewController {
     // MARK: - Instance Methods
     private func configureViews() {
         if backgroundContainerView == nil {
-            backgroundContainerView = UIView(frame: view.bounds)
+            backgroundContainerView = AnyMenuContainerView(frame: view.bounds)
+            backgroundContainerView.animator = animator
             backgroundContainerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             backgroundContainerView.translatesAutoresizingMaskIntoConstraints = true
             backgroundContainerView.backgroundColor = .clear
@@ -169,7 +170,8 @@ public class AnyMenuViewController: UIViewController {
         }
 
         if menuContainerView == nil {
-            menuContainerView = UIView(frame: view.bounds)
+            menuContainerView = AnyMenuContainerView(frame: view.bounds)
+            menuContainerView.animator = animator
             menuContainerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             menuContainerView.translatesAutoresizingMaskIntoConstraints = true
             menuContainerView.backgroundColor = .clear
@@ -179,7 +181,8 @@ public class AnyMenuViewController: UIViewController {
         }
 
         if contentContainerView == nil {
-            contentContainerView = UIView(frame: view.bounds)
+            contentContainerView = AnyMenuContainerView(frame: view.bounds)
+            contentContainerView.animator = animator
             contentContainerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             contentContainerView.translatesAutoresizingMaskIntoConstraints = true
             contentContainerView.backgroundColor = .clear
