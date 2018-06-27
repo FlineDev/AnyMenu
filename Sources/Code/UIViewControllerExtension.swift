@@ -44,10 +44,10 @@ extension UIViewController {
     func toggleMenu() {
         if let anyMenuViewController = anyMenuViewController {
             switch anyMenuViewController.menuState {
-            case .open:
+            case .open, .transitionFromOpen:
                 anyMenuViewController.closeMenu()
 
-            case .closed:
+            case .closed, .trasitionFromClosed:
                 anyMenuViewController.openMenu()
             }
         }

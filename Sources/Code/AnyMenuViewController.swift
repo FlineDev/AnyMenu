@@ -21,6 +21,8 @@ public class AnyMenuViewController: UIViewController {
     public enum MenuState {
         case open
         case closed
+        case transitionFromOpen
+        case trasitionFromClosed
     }
 
     // MARK: - Stored Type Properties
@@ -321,6 +323,10 @@ public class AnyMenuViewController: UIViewController {
 
     /// Opens the menu.
     public func openMenu(completion: ((Bool) -> Void)? = nil) {
+        if menuState == .closed {
+            menuState = .trasitionFromClosed
+        }
+
         animator.startAnimation(for: .open) { [unowned self] success in
             if success {
                 self.menuState = .open
@@ -332,6 +338,10 @@ public class AnyMenuViewController: UIViewController {
 
     /// Closes the menu.
     public func closeMenu(completion: ((Bool) -> Void)? = nil) {
+        if menuState == .open {
+            menuState = .transitionFromOpen
+        }
+
         animator.startAnimation(for: .closed) { [unowned self] success in
             if success {
                 self.menuState = .closed

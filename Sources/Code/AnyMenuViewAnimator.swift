@@ -106,7 +106,7 @@ internal class AnyMenuViewAnimator: NSObject {
         b.x *= (1 / scale.x)
         b.y *= (1 / scale.y)
 
-        if menuState == .open {
+        if menuState == .open || menuState == .transitionFromOpen {
             (a, b) = (CGPoint(x: -b.x, y: -b.y), CGPoint(x: -a.x, y: -a.y))
         }
 
@@ -257,6 +257,14 @@ internal class AnyMenuViewAnimator: NSObject {
     }
 
     func layout(progress: CGFloat) {
+        if viewController.menuState == .open {
+            viewController.menuState = .transitionFromOpen
+        }
+
+        if viewController.menuState == .closed {
+            viewController.menuState = .trasitionFromClosed
+        }
+
         let currentMenuViewTransform = interpolateTransform(from: initialMenuViewTransform, to: finalMenuViewTransform, progress: progress)
         let currentContentViewTransform = interpolateTransform(from: initialContentViewTransform, to: finalContentViewTransform, progress: progress)
         let currentShadowViewTransform = viewController.menuOverlaysContent ? currentMenuViewTransform : currentContentViewTransform
