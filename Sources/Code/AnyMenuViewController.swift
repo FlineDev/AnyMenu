@@ -265,7 +265,7 @@ public class AnyMenuViewController: UIViewController {
         contentViewController.view.removeFromSuperview()
         contentContainerView.addSubview(contentViewController.view)
         contentViewController.view.isHidden = false
-        menuViewController.didMove(toParentViewController: self)
+        contentViewController.didMove(toParentViewController: self)
 
         // Remove old menu view controller if any
         if let oldContentViewController = oldContentViewController {
