@@ -1,4 +1,4 @@
-// swift-tools-version:3.1 – swiftlint:disable file_header
+// swift-tools-version:4.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
