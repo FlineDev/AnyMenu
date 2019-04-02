@@ -5,8 +5,13 @@ import PackageDescription
 
 let package = Package(
     name: "AnyMenu",
-    dependencies: [
-//        .package(url: "https://github.com/Flinesoft/HandySwift.git", .upToNextMajor(from: "2.3.0")),
-//        .package(url: "https://github.com/Flinesoft/HandyUIKit.git", .upToNextMajor(from: "1.4.0")),
-    ]
+    products: [
+       .library(name: "AnyMenu", targets: ["AnyMenu"])
+   ],
+   targets: [
+       .target(
+           name: "AnyMenu",
+           path: "Sources"
+       )
+   ]
 )
