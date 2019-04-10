@@ -74,7 +74,7 @@ Refer to [CocoaPods.org](https://cocoapods.org) for detailed / updates instructi
 Add the following to your Package.swift:
 
 ```swift
-.package(url: "git@github.com:Flinesoft/AnyMenu.git", .branch("stable")),
+.package(url: "https://github.com/Flinesoft/AnyMenu.git", .branch("stable")),
 ```
 
 Next, add `AnyMenu` to your App targets dependencies like so:
