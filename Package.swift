@@ -10,7 +10,7 @@ let package = Package(
     targets: [
         .target(
             name: "AnyMenu",
-            path: "App"
+            path: "Sources"
         )
     ]
 )
