@@ -69,6 +69,27 @@ Now close your project and run `pod install` from the command line. Then open th
 Build your project once (with `Cmd+B`) to update the frameworks known to Xcode. Now you can `import AnyMenu` in each class you want to use its features.
 Refer to [CocoaPods.org](https://cocoapods.org) for detailed / updates instructions.
 
+### Accio
+
+Add the following to your Package.swift:
+
+```swift
+.package(url: "https://github.com/Flinesoft/AnyMenu.git", .branch("stable")),
+```
+
+Next, add `AnyMenu` to your App targets dependencies like so:
+
+```swift
+.target(
+    name: "App",
+    dependencies: [
+        "AnyMenu",
+    ]
+),
+```
+
+Then run `accio update`.
+
 ## Usage
 
 Please have a look at the **Demo project** for a complete example on how to use this framework.
