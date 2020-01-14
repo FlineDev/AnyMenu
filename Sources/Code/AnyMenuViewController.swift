@@ -171,6 +171,17 @@ public class AnyMenuViewController: UIViewController {
         configureMenuViewFrame()
     }
 
+    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        coordinator.animate(
+            alongsideTransition: { [weak self] _ in
+                self?.configureMenuViewFrame()
+            },
+            completion: nil
+        )
+    }
+
     // MARK: - Instance Methods
     private func configureViews() {
         if backgroundContainerView == nil {
@@ -303,6 +314,7 @@ public class AnyMenuViewController: UIViewController {
     private func configureMenuViewFrame() {
         let openMenuContentFrame = view.bounds.applying(animator.finalContentViewTransform)
         menuViewController.view.frame.size.width = menuContainerView.frame.size.width - (menuContainerView.frame.size.width - openMenuContentFrame.origin.x)
+        menuViewController.updateViewConstraints()
         // TODO: make sure the menu size calculation also works for top, bottom and right sided menu
     }
 
