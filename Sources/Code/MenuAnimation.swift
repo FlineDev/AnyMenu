@@ -8,6 +8,8 @@
 
 import UIKit
 
+// swiftlint:disable identifier_name
+
 /// A animation structure to describe menu animations.
 public struct MenuAnimation {
     // MARK: - Sub Types
@@ -52,3 +54,5 @@ extension MenuAnimation {
         duration: 0.3, menuViewActions: [], contentViewActions: [.translate(x: 300, y: 0)], timingParameters: UICubicTimingParameters(animationCurve: .easeOut)
     )
 }
+
+// swiftlint:enable identifier_name

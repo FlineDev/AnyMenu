@@ -111,12 +111,12 @@ public class AnyMenuViewController: UIViewController {
     }
 
     /// Returns a childViewController for the status bar style.
-    public override var childViewControllerForStatusBarStyle: UIViewController? {
+    public override var childForStatusBarStyle: UIViewController? {
         return animator.contentIntersectsStatusBar ? contentViewController : menuViewController
     }
 
     /// Returns a childViewController for status bar visibility.
-    public override var childViewControllerForStatusBarHidden: UIViewController? {
+    public override var childForStatusBarHidden: UIViewController? {
         return animator.contentIntersectsStatusBar ? contentViewController : menuViewController
     }
 
@@ -171,6 +171,17 @@ public class AnyMenuViewController: UIViewController {
         configureMenuViewFrame()
     }
 
+    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        coordinator.animate(
+            alongsideTransition: { [weak self] _ in
+                self?.configureMenuViewFrame()
+            },
+            completion: nil
+        )
+    }
+
     // MARK: - Instance Methods
     private func configureViews() {
         if backgroundContainerView == nil {
@@ -220,52 +231,52 @@ public class AnyMenuViewController: UIViewController {
             view.addSubview(shadowView)
         }
 
-        view.bringSubview(toFront: menuOverlaysContent ? contentContainerView : menuContainerView)
-        view.bringSubview(toFront: shadowView)
-        view.bringSubview(toFront: menuOverlaysContent ? menuContainerView : contentContainerView)
+        view.bringSubviewToFront(menuOverlaysContent ? contentContainerView : menuContainerView)
+        view.bringSubviewToFront(shadowView)
+        view.bringSubviewToFront(menuOverlaysContent ? menuContainerView : contentContainerView)
     }
 
     private func configureBackgroundViewController(oldBackgroundViewController: UIViewController?) {
         // remove old background view controller if any
         if let oldBackgroundViewController = oldBackgroundViewController {
-            oldBackgroundViewController.willMove(toParentViewController: nil)
+            oldBackgroundViewController.willMove(toParent: nil)
             oldBackgroundViewController.view.removeFromSuperview()
-            oldBackgroundViewController.removeFromParentViewController()
+            oldBackgroundViewController.removeFromParent()
         }
 
         // add new background view controller
         if let backgroundViewController = backgroundViewController {
-            addChildViewController(backgroundViewController)
+            addChild(backgroundViewController)
             backgroundViewController.view.frame = menuContainerView.bounds
             backgroundViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             backgroundViewController.view.translatesAutoresizingMaskIntoConstraints = true
             backgroundContainerView.addSubview(backgroundViewController.view)
-            backgroundViewController.didMove(toParentViewController: self)
+            backgroundViewController.didMove(toParent: self)
         }
     }
 
     private func configureMenuViewController(oldMenuViewController: UIViewController? = nil) {
         // remove old menu view controller if any
         if let oldMenuViewController = oldMenuViewController {
-            oldMenuViewController.willMove(toParentViewController: nil)
+            oldMenuViewController.willMove(toParent: nil)
             oldMenuViewController.view.removeFromSuperview()
-            oldMenuViewController.removeFromParentViewController()
+            oldMenuViewController.removeFromParent()
         }
 
         // add new menu view controller
-        addChildViewController(menuViewController)
+        addChild(menuViewController)
         menuViewController.view.frame = menuContainerView.bounds
         menuViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         menuViewController.view.translatesAutoresizingMaskIntoConstraints = true
         menuContainerView.addSubview(menuViewController.view)
-        menuViewController.didMove(toParentViewController: self)
+        menuViewController.didMove(toParent: self)
 
         backgroundContainerView.backgroundColor = menuViewController.view.backgroundColor
     }
 
     private func configureContentViewController(oldContentViewController: UIViewController? = nil) {
         // Add new content view controller
-        addChildViewController(contentViewController)
+        addChild(contentViewController)
 
         // First add view to self's view which isn't transformed. Thereby, the navigation bar is layouted properly.
         // After this has been done (which isn't visible due to isHidden, real layout can be done.
@@ -279,13 +290,13 @@ public class AnyMenuViewController: UIViewController {
         contentViewController.view.removeFromSuperview()
         contentContainerView.addSubview(contentViewController.view)
         contentViewController.view.isHidden = false
-        contentViewController.didMove(toParentViewController: self)
+        contentViewController.didMove(toParent: self)
 
         // Remove old menu view controller if any
         if let oldContentViewController = oldContentViewController {
-            oldContentViewController.willMove(toParentViewController: nil)
+            oldContentViewController.willMove(toParent: nil)
             oldContentViewController.view.removeFromSuperview()
-            oldContentViewController.removeFromParentViewController()
+            oldContentViewController.removeFromParent()
         }
 
         if #available(iOS 11.0, *) {
@@ -303,6 +314,7 @@ public class AnyMenuViewController: UIViewController {
     private func configureMenuViewFrame() {
         let openMenuContentFrame = view.bounds.applying(animator.finalContentViewTransform)
         menuViewController.view.frame.size.width = menuContainerView.frame.size.width - (menuContainerView.frame.size.width - openMenuContentFrame.origin.x)
+        menuViewController.updateViewConstraints()
         // TODO: make sure the menu size calculation also works for top, bottom and right sided menu
     }
 
