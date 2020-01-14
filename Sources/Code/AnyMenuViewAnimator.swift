@@ -8,7 +8,7 @@
 
 import UIKit
 
-// TODO: add support for menu overlays content
+// swiftlint:disable identifier_name
 
 internal class AnyMenuViewAnimator: NSObject {
     // MARK: - Stored Instance Properties
@@ -35,7 +35,7 @@ internal class AnyMenuViewAnimator: NSObject {
             tapGestureRecognizer
         ]
 
-        return gestureRecognizers.flatMap { $0 }
+        return gestureRecognizers.compactMap { $0 }
     }
 
     // MARK: - Initializers
@@ -366,3 +366,5 @@ extension CGRect {
         return width * height
     }
 }
+
+// swiftlint:enable identifier_name
